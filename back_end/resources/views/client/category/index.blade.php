@@ -11,12 +11,19 @@
         <input class="border border-none form-control mb-2" name="q" value="{{ $search }}">
     </form>
 
+    @if (session()->has('success_category'))
+        <div class="alert alert-success mt-2">
+            {{ session()->get('success_category') }}
+        </div>
+    @endif
+
     <table class="table table-dark table-striped">
         <tbody>
         <tr>
             <th>id</th>
             <th>Name</th>
             <th>Count</th>
+            <th>Created_at</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -26,6 +33,7 @@
                 <td>{{ $each->id }}</td>
                 <td>{{ $each->name }}</td>
                 <td>{{ $each->product_count }}</td>
+                <td>{{ $each->all_created_at }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('categories.edit', $each) }}">
                         Edit

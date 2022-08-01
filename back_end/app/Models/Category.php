@@ -17,4 +17,8 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getAllCreatedAtAttribute() {
+        return $this->created_at->format('d-m-y');
+    }
 }

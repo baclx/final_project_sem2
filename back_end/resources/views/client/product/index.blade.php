@@ -11,6 +11,12 @@
         <input class="border border-none form-control mb-2" name="q" value="{{ $search }}">
     </form>
 
+    @if (session()->has('success_product'))
+        <div class="alert alert-success mt-2">
+            {{ session()->get('success_product') }}
+        </div>
+    @endif
+
     <table class="table table-dark table-striped">
         <tbody>
         <tr>

@@ -43,9 +43,7 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category categoryById;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
-    private Status statusById;
+   
 
     @OneToMany(mappedBy = "productByProductId")
     private Collection<Review> reviewsById;

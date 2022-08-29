@@ -17,6 +17,6 @@ public class Status {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "statusByStatusId")
+    @OneToMany(mappedBy = "statusById")
     private Collection<Product> productsById;
 }

@@ -18,6 +18,10 @@ public class Product {
     @Column(name = "name")
     private String name;
     @Basic
+    @Column(name = "image")
+    private String image;
+
+    @Basic
     @Column(name = "price")
     private double price;
     @Basic
@@ -34,30 +38,16 @@ public class Product {
     private Timestamp updatedAt;
     @OneToMany(mappedBy = "productByProductId")
     private Collection<OrderDetail> orderDetailsById;
+
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    private Category categoryByCategoryId;
-    @ManyToOne
-    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
-    private Brand brandByBrandId;
+    private Category categoryById;
+
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
-    private Status statusByStatusId;
+    private Status statusById;
+
     @OneToMany(mappedBy = "productByProductId")
     private Collection<Review> reviewsById;
-    @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "id")
-    private ProductType typeByTypeId;
-    @ManyToOne
-    @JoinColumn(name = "size_id", referencedColumnName = "id")
-    private ProductSize sizeBySizeId;
-    @ManyToOne
-    @JoinColumn(name = "sugar_id", referencedColumnName = "id")
-    private Sugar sugarBySugarId;
-    @ManyToOne
-    @JoinColumn(name="ice_id",referencedColumnName = "id" )
-    private Ice iceByIceId;
-    @ManyToOne
-    @JoinColumn(name="topping_id",referencedColumnName = "id" )
-    private Topping toppingByToppingId;
+
 }

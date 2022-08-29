@@ -49,4 +49,19 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product productByProductId;
+    @ManyToOne
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
+    private ProductType typeByTypeId;
+    @ManyToOne
+    @JoinColumn(name = "size_id", referencedColumnName = "id")
+    private ProductSize sizeBySizeId;
+    @ManyToOne
+    @JoinColumn(name = "sugar_id", referencedColumnName = "id")
+    private Sugar sugarBySugarId;
+    @ManyToOne
+    @JoinColumn(name="ice_id",referencedColumnName = "id" )
+    private Ice iceByIceId;
+    @ManyToOne
+    @JoinColumn(name="topping_id",referencedColumnName = "id" )
+    private Topping toppingByToppingId;
 }

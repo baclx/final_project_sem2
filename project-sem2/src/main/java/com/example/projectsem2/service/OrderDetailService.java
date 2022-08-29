@@ -7,4 +7,5 @@ import java.util.List;
 public interface OrderDetailService {
     List<OrderDetail> getAllOrderDetail();
     List<OrderDetail> getReceiptUserId(Long userId);
+
 }

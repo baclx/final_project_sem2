@@ -9,7 +9,7 @@ public interface ProductService {
     List<Product> getAllNewProduct();
     List<Product> getAllProduct();
     List<Product> getAllByCategory(String category);
-    List<Product> getAllByBrand(String brand);
+
 
 }
 

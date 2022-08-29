@@ -13,8 +13,8 @@ public class Topping {
     private int id;
     @Basic
     @Column(name = "topping")
-    private char topping;
-    @OneToMany(mappedBy = "topingByToppingId")
-    private Collection<Product> productById;
+    private String topping;
+    @OneToMany(mappedBy = "toppingByToppingId")
+    private Collection<OrderDetail> orderDetailsById;
 }
 

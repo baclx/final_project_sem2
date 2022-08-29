@@ -4,6 +4,8 @@ import com.example.projectsem2.model.Product;
 import com.example.projectsem2.repository.ProductRepository;
 import com.example.projectsem2.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllNewProduct() {
-        return null;
+        Page<Product> productPage = productRepository.getAllNewProduct(PageRequest.of(0, 6));
+        List<Product> products = productPage.getContent();
+        return products;
     }
 
     @Override
@@ -28,8 +32,5 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAllByCategory(category);
     }
 
-    @Override
-    public List<Product> getAllByBrand(String brand) {
-        return productRepository.getAllByBrand(brand);
-    }
+
 }

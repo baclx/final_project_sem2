@@ -13,13 +13,6 @@ public class Review {
     @Column(name = "id")
     private long id;
 
-//    @Basic
-//    @Column(name = "user_id")
-//    private long userId;
-//
-//    @Basic
-//    @Column(name = "product_id")
-//    private long productId;
 
     @Basic
     @Column(name = "comment")

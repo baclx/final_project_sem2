@@ -16,5 +16,5 @@ public class ProductType {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "typeByTypeId")
-    private Collection<Product> productById;
+    private Collection<OrderDetail> orderDetailsById;
 }

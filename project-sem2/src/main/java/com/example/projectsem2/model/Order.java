@@ -14,13 +14,6 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-//    @Basic
-//    @Column(name = "payment_id")
-//    private long paymentId;
-//
-//    @Basic
-//    @Column(name = "status_id")
-//    private long statusId;
 
     @Basic
     @Column(name = "created_at")

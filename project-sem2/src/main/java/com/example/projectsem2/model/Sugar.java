@@ -13,7 +13,7 @@ public class Sugar {
     private int id;
     @Basic
     @Column(name = "percent")
-    private char percent;
+    private String percent;
     @OneToMany(mappedBy = "sugarBySugarId")
-    private Collection<Product> productById;
+    private Collection<OrderDetail> orderDetailsById;
 }

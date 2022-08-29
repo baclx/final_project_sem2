@@ -26,6 +26,6 @@ public class Role {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @OneToMany(mappedBy = "roleByRoleId")
-    private Collection<UserRole> userRolesById;
+//    @OneToMany(mappedBy = "roleByRoleId")
+//    private Collection<UserRole> userRolesById;
 }

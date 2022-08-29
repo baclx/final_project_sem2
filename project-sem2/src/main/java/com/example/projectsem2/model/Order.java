@@ -14,9 +14,9 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-    @Basic
-    @Column(name = "payment_id")
-    private long paymentId;
+//    @Basic
+//    @Column(name = "payment_id")
+//    private long paymentId;
 
     @Basic
     @Column(name = "status_id")
@@ -30,12 +30,12 @@ public class Order {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @Basic
-    @Column(name = "user_id")
-    private long userId;
+//    @Basic
+//    @Column(name = "user_id")
+//    private long userId;
 
     @ManyToOne
-    @JoinColumn(name = "payment_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "payment_id")
     private Payment paymentByPaymentId;
 
     @ManyToOne

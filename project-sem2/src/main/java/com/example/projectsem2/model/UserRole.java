@@ -14,13 +14,13 @@ public class UserRole {
     @Column(name = "id")
     private long id;
 
-    @Basic
-    @Column(name = "user_id")
-    private long userId;
-
-    @Basic
-    @Column(name = "role_id")
-    private long roleId;
+//    @Basic
+//    @Column(name = "user_id")
+//    private long userId;
+//
+//    @Basic
+//    @Column(name = "role_id")
+//    private long roleId;
 
     @Basic
     @Column(name = "created_at")

@@ -4,19 +4,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
-
 @Entity
 @Data
-public class Status {
+public class Ice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private long id;
-
+    private int id;
     @Basic
-    @Column(name = "name")
-    private String name;
-
-    @OneToMany(mappedBy = "statusByStatusId")
-    private Collection<Product> productsById;
+    @Column(name = "percent")
+    private String percent;
+    @OneToMany(mappedBy = "iceByIceId")
+    private Collection<OrderDetail> orderDetailsById;
 }
+

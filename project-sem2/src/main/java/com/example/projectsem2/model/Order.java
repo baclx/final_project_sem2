@@ -28,7 +28,7 @@ public class Order {
 //    private long userId;
 
     @ManyToOne
-    @JoinColumn(name = "payment_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "payment_id")
     private Payment paymentByPaymentId;
 
     @ManyToOne

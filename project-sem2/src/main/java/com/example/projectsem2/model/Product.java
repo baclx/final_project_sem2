@@ -14,6 +14,7 @@ public class Product {
     @Column(name = "id")
     private long id;
 
+
     @Basic
     @Column(name = "name")
     private String name;
@@ -24,6 +25,7 @@ public class Product {
     @Basic
     @Column(name = "price")
     private double price;
+
     @Basic
     @Column(name = "sale")
     private short sale;

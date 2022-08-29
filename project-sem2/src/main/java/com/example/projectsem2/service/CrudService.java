@@ -11,5 +11,7 @@ public interface CrudService<T> {
 
     Optional<T> findById(Long id);
 
+    Optional<T> findByName(String name);
+    
     void deleteById(Long id);
 }

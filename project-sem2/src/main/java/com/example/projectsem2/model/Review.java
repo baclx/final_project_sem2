@@ -14,6 +14,7 @@ public class Review {
     private long id;
 
 
+
     @Basic
     @Column(name = "comment")
     private String comment;

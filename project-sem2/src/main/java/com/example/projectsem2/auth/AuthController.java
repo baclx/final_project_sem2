@@ -108,7 +108,7 @@ public class AuthController {
         return "redirect:/login";
     }
 
-    @GetMapping("/test")
+    @GetMapping({"/test", "/"})
     public String test() {
         return "admin/test";
     }

@@ -33,4 +33,5 @@ build/
 .vscode/
 
 # properties
+project-sem2/src/main/resources/application.properties
 *.properties

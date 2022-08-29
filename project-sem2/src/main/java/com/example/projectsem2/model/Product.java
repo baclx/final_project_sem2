@@ -14,13 +14,13 @@ public class Product {
     @Column(name = "id")
     private long id;
 
-    @Basic
-    @Column(name = "category_id")
-    private long categoryId;
+//    @Basic
+//    @Column(name = "category_id")
+//    private long categoryId;
 
-    @Basic
-    @Column(name = "brand_id")
-    private long brandId;
+//    @Basic
+//    @Column(name = "brand_id")
+//    private long brandId;
 
     @Basic
     @Column(name = "name")
@@ -30,9 +30,9 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    @Basic
-    @Column(name = "status_id")
-    private long statusId;
+//    @Basic
+//    @Column(name = "status_id")
+//    private long statusId;
 
     @Basic
     @Column(name = "sale")

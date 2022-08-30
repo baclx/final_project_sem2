@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -71,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/404");
 //
 //        // has 1 role - not work -> has many role -> work --> phai nhu nay ms chay :vv
-        http.authorizeRequests().antMatchers("/admin").access("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGE')");
+//        http.authorizeRequests().antMatchers("/admin").access("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGE')");
         http.authorizeRequests().antMatchers("/api/test/all").access("hasAuthority('ROLE_USER')");
         http.authorizeRequests().antMatchers("/api/test/mod").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/api/test/admin").access("hasRole('ROLE_ADMIN')");
@@ -83,9 +85,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
 //                j_spring_security_check
-                .loginProcessingUrl("/process_login")
+                .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
-                .defaultSuccessUrl("/test", true)
+                .defaultSuccessUrl("/index", true)
                 .failureUrl("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -93,5 +95,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login");
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        return new InMemoryTokenRepositoryImpl();
     }
 }

@@ -15,7 +15,7 @@ public class RoleServiceImpl implements CrudService<Role> {
     RoleRepository roleRepository;
 
     @Override
-    public List<Role> FindAll() {
+    public List<Role> findAll() {
         return roleRepository.findAll();
     }
 

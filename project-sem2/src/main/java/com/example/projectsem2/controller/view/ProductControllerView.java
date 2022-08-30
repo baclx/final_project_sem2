@@ -20,7 +20,7 @@ public class ProductControllerView {
         return null;
     }
 
-    @GetMapping("/index")
+    @GetMapping({"/index", "/"})
     public String index() {
         return "index";
     }

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 // T - Type
 public interface CrudService<T> {
-    List<T> FindAll();
+    List<T> findAll();
 
     void save(T t);
 

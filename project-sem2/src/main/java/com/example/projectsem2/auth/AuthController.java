@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashSet;
@@ -44,35 +45,12 @@ public class AuthController {
         return "auth/login";
     }
 
-    @PostMapping("/process_login")
-    public void authenticateUser(LoginRequest loginRequest) {
-        UsernamePasswordAuthenticationToken obj =
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPassword()
-                );
-
-        Authentication authentication = authenticationManager.authenticate(obj);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String access_token = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-
-        ResponseEntity<JwtResponse> response = ResponseEntity.ok(new JwtResponse(
-                access_token,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles
-        ));
-
-        System.out.println(response);
-    }
+//    @PostMapping("/process_login")
+//    public void processLogin(LoginRequest loginRequest) {
+//        if (usersService.findByEmail(loginRequest.getEmail()).isPresent()) {
+//
+//        }
+//    }
 
     @GetMapping("/register")
     public String register(
@@ -108,8 +86,11 @@ public class AuthController {
         return "redirect:/login";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "admin/test";
+    @GetMapping("/data")
+    public ResponseEntity<String> getToken(
+            @RequestHeader(value="Authorization")  String authorizationHeader
+    ){
+        String jwt = authorizationHeader.substring(7);
+        return ResponseEntity.ok(jwt);
     }
 }

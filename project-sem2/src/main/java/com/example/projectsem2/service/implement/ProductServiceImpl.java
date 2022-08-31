@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -32,5 +33,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAllByCategory(category);
     }
 
+    @Override
+    public Optional<Product> findByID(Long id) {
+        return productRepository.findById(id);
+    }
 
+    @Override
+    public void save(Product product) {
+        productRepository.save(product);
+    }
 }

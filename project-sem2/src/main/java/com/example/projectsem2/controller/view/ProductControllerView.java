@@ -20,8 +20,10 @@ public class ProductControllerView {
         return null;
     }
 
-    @GetMapping({"/index", "/"})
-    public String index() {
+    @GetMapping({"/index", "/","/home"})
+    public String index(Model model) {
+        List<Product> products = productService.getAllProduct();
+        model.addAttribute("products",products);
         return "index";
     }
 

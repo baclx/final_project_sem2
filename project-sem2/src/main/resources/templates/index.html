@@ -88,11 +88,31 @@
                     <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
                         <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Drink</span>World</h1>
                     </a>
-                    <div class="navbar-nav mr-auto py-0">
-                        <a th:href="@{/service}" class="nav-item nav-link">Service</a>
-                        <a th:href="@{/gallery}" class="nav-item nav-link">Gallery</a>
-                        <a th:href="@{/contact}" class="nav-item nav-link">Contact</a>
-                    </div>
+                    <ul class="navbar-nav ml-auto py-0">
+                        <li class="nav-item"><a th:href="@{/service}" class=" nav-link">Service</a></li>
+                        <li class="nav-item"><a th:href="@{/gallery}" class=" nav-link">Gallery</a></li>
+<!--                        <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Contact</a></li>-->
+                        <li class="nav-item"><li th:switch="${currentUserId}?:'defaul value'">
+                            <ul class="d-flex mr-4" th:case="'0'">
+                                <li class="nav-item cta" style="list-style: none"><a class="nav-link" th:href="@{/login}"><span>Sign in</span></a></li>
+                                <li class="nav-item cta" style="list-style: none"><a class="nav-link" th:href="@{/register}"><span>Sign up</span></a></li>
+                            </ul>
+
+                            <ul th:case="*" class="dropdown show">
+                                <li class="nav-item cta  "
+                                    style="list-style: none">
+                                    <a class="btn btn-outline-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                       th:href="@{/logout}" th:text="${currentUser.username} ?:'defaul value'">
+                                        <!--                                    <img th:src="@{'/images/getimage/'+ ${currentUser.n}}" style="width: 50px">-->
+                                    </a>
+                                <li class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" th:href="@{'/userInfo'(userId=${currentUserId})}">Account</a>
+                                    <a class="dropdown-item" th:href="@{/logout}">Sign out</a>
+                                </li>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>

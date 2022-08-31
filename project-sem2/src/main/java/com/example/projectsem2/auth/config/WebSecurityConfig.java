@@ -48,6 +48,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
+//        http.requestMatchers().antMatchers("/test").and().authorizeRequests();
+        http.csrf().disable();
+//        http.authorizeRequests().antMatchers("/api/**").permitAll();
+        http.authorizeRequests().antMatchers("/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/lib/**").permitAll();
+        http.authorizeRequests().antMatchers("/mail/**").permitAll();
+        http.authorizeRequests().antMatchers("**/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/images/**").permitAll();
+        http.authorizeRequests().antMatchers("/fonts/**").permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/home").permitAll();
+        http.authorizeRequests().antMatchers("/uploads/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/**").permitAll();
+        http.authorizeRequests().antMatchers("/img/**").permitAll();
+        http.authorizeRequests().antMatchers("/static/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/fonts/**").permitAll();
+
+        http.authorizeRequests()
+                .antMatchers("/login", "/logout", "/register", "/process_register", "/process_login")
+                .permitAll();
+
+        // bug - phai co tk - va nhieu hon 1 role thi moi dung dc
+//        http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -55,19 +83,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(authenticationJwtTokenFilter(),
                 UsernamePasswordAuthenticationFilter.class);
-
-//        http.requestMatchers().antMatchers("/test").and().authorizeRequests();
-
-        http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/fonts/**").permitAll();
-        http.authorizeRequests()
-                .antMatchers("/login", "/logout", "/register", "/process_register", "/process_login")
-                .permitAll();
-
-        // bug - phai co tk - va nhieu hon 1 role thi moi dung dc
-//        http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
-
 //        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/404");
 //
 //        // has 1 role - not work -> has many role -> work --> phai nhu nay ms chay :vv

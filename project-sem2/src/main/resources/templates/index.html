@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -9,21 +10,22 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
+    <link th:href="@{../img/favicon.ico}" href="img/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{https://fonts.gstatic.com}" rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link th:href="@{'https://fonts.googleapis.com/css2?family='+'Poppins:wght@400;500;600;700&display=swap'}" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link th:href="@{../static/lib/owlcarousel/assets/owl.carousel.min.css}"  rel="stylesheet">
+    <link th:href="@{../lib/lightbox/css/lightbox.min.css}" href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link th:href="@{css/style.css}" href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -101,7 +103,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/logo5.jpg" alt="Image">
+                    <img class="w-100" th:src="@{img/logo5.jpg}" src="img/logo5.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
@@ -111,7 +113,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/logo7.jpg" alt="Image">
+                    <img class="w-100" th:src="@{../img/logo7.jpg}" src="img/logo7.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Traditional & Delicious</h4>
@@ -121,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <a class="carousel-control-prev"  href="#header-carousel" data-slide="prev">
                 <div class="btn btn-secondary px-0" style="width: 45px; height: 45px;">
                     <span class="carousel-control-prev-icon mb-n1"></span>
                 </div>
@@ -146,9 +148,6 @@
                         <span aria-hidden="true">&times;</span>
                     </button>        
                     <!-- 16:9 aspect ratio -->
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
-                    </div>
                 </div>
             </div>
         </div>
@@ -170,7 +169,7 @@
                     <div class="owl-carousel service-carousel">
                         <div class="service-item">
                             <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="img/service-1.jpg" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" th:src="@{../img/service-1.jpg}" src="img/service-1.jpg" style="object-fit: cover;">
                             </div>
                             <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
                                 <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Quality Maintain</h5>
@@ -180,7 +179,7 @@
                         </div>
                         <div class="service-item">
                             <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="img/service-2.jpg" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" th:src="@{../img/service-2.jpg}" src="img/service-2.jpg" style="object-fit: cover;">
                             </div>
                             <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
                                 <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Individual Approach</h5>
@@ -190,7 +189,7 @@
                         </div>
                         <div class="service-item">
                             <div class="service-img mx-auto">
-                                <img class="rounded-circle w-100 h-100 bg-light p-3" src="img/service-3.jpg" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100 bg-light p-3" th:src="@{../img/service-3.jpg}" src="img/service-3.jpg" style="object-fit: cover;">
                             </div>
                             <div class="position-relative text-center bg-light rounded p-4 pb-5" style="margin-top: -75px;">
                                 <h5 class="font-weight-semi-bold mt-5 mb-3 pt-5">Celebration Ice Cream</h5>
@@ -226,15 +225,15 @@
         <div class="row m-0 portfolio-container">
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="">
-                    <a class="portfolio-btn" href="img/portfolio-1.jpg" data-lightbox="portfolio">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-1.jpg}" src="img/portfolio-1.jpg" alt="">
+                    <a class="portfolio-btn" th:src="@{../img/portfolio-1.jpg}" href="img/portfolio-1.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-2.jpg}" src="img/portfolio-2.jpg" alt="">
                     <a class="portfolio-btn" href="img/portfolio-2.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
@@ -242,7 +241,7 @@
             </div>
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-3.jpg}" src="img/portfolio-3.jpg" alt="">
                     <a class="portfolio-btn" href="img/portfolio-3.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
@@ -250,7 +249,7 @@
             </div>
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-4.jpg}" src="img/portfolio-4.jpg" alt="">
                     <a class="portfolio-btn" href="img/portfolio-4.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
@@ -258,7 +257,7 @@
             </div>
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-5.jpg}" src="img/portfolio-5.jpg" alt="">
                     <a class="portfolio-btn" href="img/portfolio-5.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
@@ -266,7 +265,7 @@
             </div>
             <div class="col-lg-4 col-md-6 p-0 portfolio-item">
                 <div class="position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="">
+                    <img class="img-fluid w-100" th:src="@{../img/portfolio-6.jpg}" src="img/portfolio-6.jpg" alt="">
                     <a class="portfolio-btn" href="img/portfolio-6.jpg" data-lightbox="portfolio">
                         <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
                     </a>
@@ -288,55 +287,15 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="owl-carousel product-carousel">
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
-                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
-                                <h4 class="font-weight-bold text-white mb-0">$99</h4>
+                    <div class="owl-carousel product-carousel" >
+                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3" th:each="product:${products}">
+                            <div class="bg-primary mt-n5 py-3" style="width: 80px;" >
+                                <h4 class="font-weight-bold text-white mb-0" th:text="${product.price}+' đ'"></h4>
                             </div>
                             <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                                <img class="rounded-circle w-100 h-100" src="img/product-1.jpg" style="object-fit: cover;">
+                                <img class="rounded-circle w-100 h-100" th:src="@{'/images/getimage/'+ ${product.image}}" src="img/product-1.jpg" style="object-fit: cover;">
                             </div>
-                            <h5 class="font-weight-bold mb-4">Vanilla Ice Cream</h5>
-                            <a href="" class="btn btn-sm btn-secondary">Order Now</a>
-                        </div>
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
-                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
-                                <h4 class="font-weight-bold text-white mb-0">$99</h4>
-                            </div>
-                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                                <img class="rounded-circle w-100 h-100" src="img/product-2.jpg" style="object-fit: cover;">
-                            </div>
-                            <h5 class="font-weight-bold mb-4">Vanilla Ice Cream</h5>
-                            <a href="" class="btn btn-sm btn-secondary">Order Now</a>
-                        </div>
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
-                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
-                                <h4 class="font-weight-bold text-white mb-0">$99</h4>
-                            </div>
-                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                                <img class="rounded-circle w-100 h-100" src="img/product-3.jpg" style="object-fit: cover;">
-                            </div>
-                            <h5 class="font-weight-bold mb-4">Vanilla Ice Cream</h5>
-                            <a href="" class="btn btn-sm btn-secondary">Order Now</a>
-                        </div>
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
-                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
-                                <h4 class="font-weight-bold text-white mb-0">$99</h4>
-                            </div>
-                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                                <img class="rounded-circle w-100 h-100" src="img/product-4.jpg" style="object-fit: cover;">
-                            </div>
-                            <h5 class="font-weight-bold mb-4">Vanilla Ice Cream</h5>
-                            <a href="" class="btn btn-sm btn-secondary">Order Now</a>
-                        </div>
-                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
-                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
-                                <h4 class="font-weight-bold text-white mb-0">$99</h4>
-                            </div>
-                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                                <img class="rounded-circle w-100 h-100" src="img/product-5.jpg" style="object-fit: cover;">
-                            </div>
-                            <h5 class="font-weight-bold mb-4">Vanilla Ice Cream</h5>
+                            <h5 class="font-weight-bold mb-4" th:text="${product.name}"></h5>
                             <a href="" class="btn btn-sm btn-secondary">Order Now</a>
                         </div>
                     </div>
@@ -436,18 +395,18 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script th:src="@{../lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
+    <script th:src="@{../lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
+    <script th:src="@{../lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script th:src="@{../lib/isotope/isotope.pkgd.min.js}" src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script th:src="@{../lib/lightbox/js/lightbox.min.js}" src="lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script th:src="@{../mail/jqBootstrapValidation.min.js}"  src="mail/jqBootstrapValidation.min.js"></script>
+    <script th:src="@{../mail/contact.js}" src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script th:src="@{../mail/main.js}" src="js/main.js"></script>
 </body>
 
 </html>

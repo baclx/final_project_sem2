@@ -1,5 +1,7 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name = "user_role")
+
 public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

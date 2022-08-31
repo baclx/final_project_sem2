@@ -1,5 +1,6 @@
 package com.example.projectsem2.repository;
 
+import com.example.projectsem2.model.Category;
 import com.example.projectsem2.model.Product;
 import com.example.projectsem2.model.Review;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "select p from Product p order by p.createdAt DESC")
@@ -16,4 +18,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "select p from Product p inner join Category c on c.id = p.categoryById.id where c.name=?1")
     List<Product> getAllByCategory(String category);
 
+    //admin
+    @Query("select t from Product t where t.categoryById = ?1")
+    Optional<Product> findProductByCategoryID(Category category);
 }

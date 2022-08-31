@@ -30,10 +30,6 @@ public class Order {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-//    @Basic
-//    @Column(name = "user_id")
-//    private long userId;
-
     @ManyToOne
     @JoinColumn(name = "payment_id")
     private Payment paymentByPaymentId;

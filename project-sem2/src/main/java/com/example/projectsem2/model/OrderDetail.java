@@ -14,14 +14,6 @@ public class OrderDetail {
     @Column(name = "id")
     private long id;
 
-//    @Basic
-//    @Column(name = "order_id")
-//    private long orderId;
-//
-//    @Basic
-//    @Column(name = "product_id")
-//    private long productId;
-
     @Basic
     @Column(name = "quantity")
     private int quantity;

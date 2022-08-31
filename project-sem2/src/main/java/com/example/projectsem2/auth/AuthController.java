@@ -4,9 +4,19 @@ import com.example.projectsem2.auth.common.Const;
 import com.example.projectsem2.auth.jwt.JwtUtils;
 import com.example.projectsem2.model.Role;
 import com.example.projectsem2.model.User;
+<<<<<<< Updated upstream
 import com.example.projectsem2.service.impl.RoleServiceImplAdmin;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
+=======
+import com.example.projectsem2.service.impl.RoleServiceImpl;
+import com.example.projectsem2.service.impl.UserServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+>>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/process_login")
-    public void authenticateUser(LoginRequest loginRequest) {
+    public String authenticateUser(LoginRequest loginRequest) throws JsonProcessingException {
         UsernamePasswordAuthenticationToken obj =
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -62,7 +72,16 @@ public class AuthController {
                 roles
         ));
 
-        System.out.println(response);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = mapper.readTree(String.valueOf(response.getBody()));
+        String token = node.path("access_token").asText();
+
+        // Use the access token for authentication
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return "admin/test";
     }
 
     @GetMapping("/register")

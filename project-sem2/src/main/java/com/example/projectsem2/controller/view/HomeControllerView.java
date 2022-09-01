@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,13 +42,19 @@ public class HomeControllerView {
     }
     @GetMapping(value = {"/","/index","/home"})
     public String showIndex(Model model){
-        List<Product> products = productService.getAllProduct();
-        model.addAttribute("products",products);
-        System.out.println(products);
-        User currentUser = userService.findById(getcurrentUserId()).get();
-        model.addAttribute("currentUser",currentUser);
+        List<Product> topProduct = productService.getTopSeller();
+        //Get top 4
+        List<Product> top3Products = new ArrayList<>();
+        for(int i = 0 ; i <= 2; i++){
+            top3Products.add(topProduct.get(i));
+        }
+        model.addAttribute("products",top3Products);
         Long currentUserId = getcurrentUserId();
-        model.addAttribute("currentUserId",currentUserId);
+        if(currentUserId != 0){
+            model.addAttribute("currentUserId",currentUserId);
+            User currentUser = userService.findById(getcurrentUserId()).get();
+            model.addAttribute("currentUser",currentUser);
+        }
         return "index";
     }
 

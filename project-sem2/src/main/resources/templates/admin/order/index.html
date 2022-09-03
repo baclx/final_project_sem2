@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/index}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>[[${title}]]</title>
+</head>
+<body>
+<section layout:fragment="content">
+  <h1>[[${title}]]</h1>
+
+  <a class="btn btn-primary mb-4 mt-2 mr-2" th:href="@{/admin/order/orderNotDone}">
+    Order Pending
+  </a>
+  <a class="btn btn-primary mb-4 mt-2" th:href="@{/admin/order/orderDone}">
+    Order Done
+  </a>
+
+</section>
+</body>
+</html>

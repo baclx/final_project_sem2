@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/index}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1>[[${title}]]</h1>
+
+    <a class="btn btn-primary mb-2 mt-2 mr-2" th:href="@{/admin/order/orderNotDone}">
+        <i class="uil-arrow-left"></i>
+        Order Pending
+    </a>
+
+    <div th:if="${msg}" class="alert alert-success text-center">
+        [[${msg}]]
+    </div>
+    <div th:if="${err}" class="alert alert-danger text-center">
+        [[${err}]]
+    </div>
+
+    <table class="table table-dark table-striped w-100">
+        <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Order Date</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Detail</th>
+        </tr>
+        <th:block th:each="order : ${orderLists}">
+            <tr>
+                <td>[[${order.id}]]</td>
+                <th:block th:each="user : ${order.userByUserId}">
+                    <td>[[${user.username}]]</td>
+                </th:block>
+                <td th:text="${#dates.format(order.createdAt, 'dd-MM-yyyy - HH:mm')}"></td>
+                <th:block th:each="payment : ${order.paymentByPaymentId}">
+                    <td>[[${payment.type}]]</td>
+                </th:block>
+                <th:block th:each="status : ${order.statusByStatusId}">
+                    <div th:switch="${status.name}">
+                        <td th:case="Pending">
+                            <span class="badge badge-warning-lighten mt-2">
+                                [[${status.name}]]
+                            </span>
+                        </td>
+                        <td th:case="Done">
+                            <span class="badge badge-success-lighten mt-2">
+                                [[${status.name}]]
+                            </span>
+                        </td>
+                        <td th:case="Cancelled">
+                            <span class="badge badge-danger-lighten mt-2">
+                                [[${status.name}]]
+                            </span>
+                        </td>
+                    </div>
+                </th:block>
+                <td>
+                    <a class="btn btn-info" th:href="@{'/admin/order/show/' + ${order.id}}">
+                        show
+                    </a>
+                </td>
+            </tr>
+            </tr>
+        </th:block>
+    </table>
+    <a th:href="@{./}">
+        Back
+    </a>
+</section>
+</body>
+</html>

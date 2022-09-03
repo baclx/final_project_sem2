@@ -8,6 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Data
+@Table(name = "Orders")
 public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,8 +33,12 @@ public class Order {
     private Payment paymentByPaymentId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User userByUserId;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status statusByStatusId;
 
     @OneToMany(mappedBy = "orderByOrderId")
     private Collection<OrderDetail> orderDetailsById;

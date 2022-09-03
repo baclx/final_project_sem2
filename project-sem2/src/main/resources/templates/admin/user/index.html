@@ -38,7 +38,18 @@
                 <td>[[${user.username}]]</td>
                 <td>[[${user.email}]]</td>
                 <th:block th:each="role : ${user.roles}">
-                    <td>[[${role.name}]]</td>
+                    <div th:switch="${role.name}">
+                        <td th:case="ROLE_USER">
+                            <span>
+                                USER
+                            </span>
+                        </td>
+                        <td th:case="ROLE_ADMIN">
+                            <span>
+                                ADMIN
+                            </span>
+                        </td>
+                    </div>
                 </th:block>
                 <td>
                     <a class="btn btn-primary" th:href="@{'/admin/user/edit/' + ${user.id}}">Edit</a>

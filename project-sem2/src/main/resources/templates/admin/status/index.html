@@ -12,7 +12,7 @@
 <section layout:fragment="content">
     <h1>[[${title}]]</h1>
 
-    <a class="btn btn-primary mb-4 mt-2" th:href="@{/admin/role/add}">
+    <a class="btn btn-primary mb-4 mt-2" th:href="@{/admin/status/add}">
         Add
     </a>
 
@@ -27,20 +27,20 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Date Created</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <th:block th:each="role : ${roleLists}">
+        <th:block th:each="status : ${statusLists}">
             <tr>
-                <td>[[${role.id}]]</td>
-                <td>[[${role.name}]]</td>
-                <td th:text="${#dates.format(role.createdAt, 'dd-MM-yyyy')}"></td>
+                <td>[[${status.id}]]</td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{'/admin/role/edit/' + ${role.id}}">Edit</a>
+                    <span>[[${status.name}]]</span>
                 </td>
                 <td>
-                    <a class="btn btn-danger" th:href="@{'/admin/role/delete/' + ${role.id}}">Delete</a>
+                    <a class="btn btn-primary" th:href="@{'/admin/status/edit/' + ${status.id}}">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" th:href="@{'/admin/status/delete/' + ${status.id}}">Delete</a>
                 </td>
             </tr>
         </th:block>

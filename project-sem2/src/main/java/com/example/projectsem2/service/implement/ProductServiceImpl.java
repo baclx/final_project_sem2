@@ -45,6 +45,11 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
+    @Override
+    public List<Product> getAllSale25() {
+        return productRepository.getAllSale25();
+    }
+
     public List<Product> getTopSeller(){
         List<Product> products = productRepository.findAll();
         Map<Long,Long> pIdMap = new HashMap<>();

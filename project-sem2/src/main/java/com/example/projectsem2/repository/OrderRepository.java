@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+
 public interface OrderRepository extends JpaRepository<Order,Long> {
     @Query("select o from Order o where o.statusByStatusId.name in ('Cancelled', 'Pending')")
     List<Order> findAllByOrderByIdDesc();
+
     @Query("select o from Order o where o.statusByStatusId.name = 'Done'")
     List<Order> findAllOrderWhereStatusDone();
 }

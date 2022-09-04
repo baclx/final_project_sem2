@@ -55,6 +55,12 @@ public class HomeControllerView {
             User currentUser = userService.findById(getcurrentUserId()).get();
             model.addAttribute("currentUser",currentUser);
         }
+        List<Product> listSale25 = productService.getAllSale25();
+        List<Product> top3Sale25 = new ArrayList<>();
+        for(int i = 0; i <= 2; i++){
+            top3Sale25.add(listSale25.get(i));
+        }
+        model.addAttribute("sale25",top3Sale25);
         return "index";
     }
 

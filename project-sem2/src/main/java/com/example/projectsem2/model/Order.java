@@ -8,8 +8,10 @@ import java.util.Collection;
 
 @Entity
 @Data
+
 @Table(name = "Orders")
 public class Order {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")

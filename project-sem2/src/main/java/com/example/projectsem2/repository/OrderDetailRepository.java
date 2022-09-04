@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail,Long> {
-    @Query(value = "SELECT od.id FROM OrderDetail od inner join Orders o " +
+    @Query(value = "SELECT od.id FROM OrderDetail od inner join Order o " +
             "ON od.orderByOrderId.id = o.id INNER JOIN User u ON " +
             "o.userByUserId.id = u.id WHERE od.createdAt = o.createdAt AND u.id=?1 ")
     List<Long> getOderDetailIdByUserId(Long userId);

@@ -15,4 +15,13 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
     @Query("select o from Order o where o.statusByStatusId.name = 'Done'")
     List<Order> findAllOrderWhereStatusDone();
+
+    @Query("SELECT count(id) from Order")
+    Long countAllOrder();
+
+    @Query("select count(o.id) from Order o where o.statusByStatusId.name = 'Done'")
+    Long countAllOrderStatusDone();
+
+    @Query("select count(o.id) from Order o where o.statusByStatusId.name in ('Cancelled', 'Pending')")
+    Long countAllOrderStatusNotDone();
 }

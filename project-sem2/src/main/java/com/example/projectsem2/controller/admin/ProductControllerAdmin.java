@@ -6,12 +6,11 @@ import com.example.projectsem2.service.ProductService;
 import com.example.projectsem2.service.impl.CategoryServiceImplAdmin;
 import com.example.projectsem2.service.impl.ProductServiceImplAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -28,12 +27,23 @@ public class ProductControllerAdmin {
 
     @GetMapping("")
     public String index(
-            Model model
+            Model model,
+            @RequestParam(value = "sortField", defaultValue = "id") String sortField,
+            @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir
     ) {
-        List<Product> productLists = productService.findAll();
+//        List<Product> productLists = productService.findAll();
+        List<Product> sortPd = productService.sort(sortField, sortDir);
 
-        model.addAttribute("productLists", productLists);
+        model.addAttribute("productLists", sortPd);
         model.addAttribute("title", "Product");
+
+        // sort
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+
+        // reverse sortDir
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "admin/product/index";
     }

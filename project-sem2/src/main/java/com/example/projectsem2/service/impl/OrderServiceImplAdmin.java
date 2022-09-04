@@ -47,4 +47,16 @@ public class OrderServiceImplAdmin implements CrudService<Order> {
     public List<Order> findAllOrderWhereStatusDone() {
         return orderRepository.findAllOrderWhereStatusDone();
     }
+
+    public Long countAllOrder() {
+        return orderRepository.countAllOrder();
+    }
+
+    public Long countAllOrderStatusDone() {
+        return orderRepository.countAllOrderStatusDone();
+    }
+
+    public Long countAllOrderStatusNotDone() {
+        return orderRepository.countAllOrderStatusNotDone();
+    }
 }

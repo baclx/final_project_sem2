@@ -1,8 +1,5 @@
 package com.example.projectsem2.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -42,7 +39,7 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "userByUserId")
-    private Collection<Order> ordersById;
+    private Collection<Orders> ordersById;
 
     @OneToMany(mappedBy = "userByUserId")
     private Collection<Review> reviewsById;

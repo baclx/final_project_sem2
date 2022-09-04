@@ -14,5 +14,6 @@ public interface ProductService {
     Optional<Product> findByID(Long id);
 
     void save(Product product);
+    List<Product> getAllSale25();
 }
 

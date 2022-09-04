@@ -32,10 +32,18 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    @Basic
-    @Column(name = "sale")
-    private short sale;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="sale_id",referencedColumnName = "id")
+    private Sale sale;
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
 
     @Basic
     @Column(name = "created_at")
@@ -88,13 +96,8 @@ public class Product {
         this.price = price;
     }
 
-    public short getSale() {
-        return sale;
-    }
 
-    public void setSale(short sale) {
-        this.sale = sale;
-    }
+
 
     public Timestamp getCreatedAt() {
         return createdAt;
@@ -134,5 +137,19 @@ public class Product {
 
     public void setReviewsById(Collection<Review> reviewsById) {
         this.reviewsById = reviewsById;
+    }
+    public double getPriceAfterSale(double price, Sale sale){
+        int sale_id = sale.getId();
+        switch (sale_id){
+            case 1:
+                return price;
+            case 2:
+                return price - price*25/100;
+            case 3:
+                return price - price*50/100;
+            case 4:
+                return price-price*75/100;
+        }
+        return price;
     }
 }

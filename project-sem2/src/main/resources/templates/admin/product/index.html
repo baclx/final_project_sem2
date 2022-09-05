@@ -24,7 +24,7 @@
     </div>
 
     <table id="tableData" class="table table-dark table-striped">
-        <tr>
+        <tr class="test">
             <th>
                 ID
                 <a th:href="@{'/admin/product?sortField=id' + '&sortDir=' + ${reverseSortDir}}">
@@ -32,7 +32,12 @@
                 </a>
             </th>
             <th>Image</th>
-            <th>Product Name</th>
+            <th>
+                Product Name
+                <a th:href="@{'/admin/product?sortField=name' + '&sortDir=' + ${reverseSortDir}}">
+                    <i class="uil-sort text-white"></i>
+                </a>
+            </th>
             <th>
                 Price
                 <a th:href="@{'/admin/product?sortField=price' + '&sortDir=' + ${reverseSortDir}}">
@@ -46,14 +51,26 @@
                 </a>
             </th>
             <th>Category</th>
-            <th>Date Created</th>
+            <th>
+                Date Created
+                <a th:href="@{'/admin/product?sortField=createdAt' + '&sortDir=' + ${reverseSortDir}}">
+                    <i class="uil-sort text-white"></i>
+                </a>
+            </th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         <th:block th:each="product : ${productLists}">
             <tr>
                 <td>[[${product.id}]]</td>
-                <td>update</td>
+                <th:block>
+                    <td th:if="${product.image}">
+                        <img th:src="${product.image}" width="60px" height="60px">
+                    </td>
+                    <td th:unless="${product.image}">
+                        <p>no-img</p>
+                    </td>
+                </th:block>
                 <td>[[${product.name}]]</td>
                 <td th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')} + đ"></td>
                 <th:block th:each="sale : ${product.sale}">

@@ -3,6 +3,7 @@ package com.example.projectsem2.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -17,8 +18,8 @@ public class Sale {
     @Column(name = "percent")
     private String percent;
 
-    @OneToOne(mappedBy = "sale",fetch = FetchType.LAZY)
-    private Product product;
+    @OneToMany(mappedBy = "sale")
+    private Collection<Product> product;
 
 
 }

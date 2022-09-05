@@ -5,14 +5,9 @@ import com.example.projectsem2.model.Product;
 import com.example.projectsem2.repository.ProductRepository;
 import com.example.projectsem2.service.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -29,10 +24,36 @@ public class ProductServiceImplAdmin implements CrudService<Product> {
             String sortField,
             String sortDir
     ) {
-        if (sortDir.equals("desc")) {
-            return productRepository.sortAllProductDesc(sortField);
+        switch (sortField) {
+            case "id":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByIdDesc();
+                }
+                return productRepository.sortAllProductOrderByIdAsc();
+            case "name":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByNameDesc();
+                }
+                return productRepository.sortAllProductOrderByNameAsc();
+            case "price":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByPriceDesc();
+                }
+                return productRepository.sortAllProductOrderByPriceAsc();
+            case "sale":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderBySaleDesc();
+                }
+                return productRepository.sortAllProductOrderBySaleAsc();
+            case "createdAt":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByCreatedAtDesc();
+                }
+                return productRepository.sortAllProductOrderByCreatedAtAsc();
         }
-        return productRepository.sortAllProductAsc(sortField);
+
+//        return productRepository.sortAllProductAsc(sortField);
+        return productRepository.findAll();
     }
 
     @Override

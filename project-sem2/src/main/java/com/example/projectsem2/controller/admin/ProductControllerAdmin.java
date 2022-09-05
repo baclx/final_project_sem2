@@ -2,28 +2,39 @@ package com.example.projectsem2.controller.admin;
 
 import com.example.projectsem2.model.Category;
 import com.example.projectsem2.model.Product;
-import com.example.projectsem2.service.ProductService;
+import com.example.projectsem2.model.Sale;
 import com.example.projectsem2.service.impl.CategoryServiceImplAdmin;
 import com.example.projectsem2.service.impl.ProductServiceImplAdmin;
+import com.example.projectsem2.service.impl.SaleServiceImplAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/product")
 public class ProductControllerAdmin {
+    private static final String UPLOAD_DIR = "src/main/resources/static/admin/images/product";
     @Autowired
     ProductServiceImplAdmin productService;
 
     @Autowired
     CategoryServiceImplAdmin categoryService;
+
+    @Autowired
+    SaleServiceImplAdmin saleService;
 
     @GetMapping("")
     public String index(
@@ -53,10 +64,12 @@ public class ProductControllerAdmin {
             Model model
     ) {
         List<Category> categoryLists = categoryService.findAll();
+        List<Sale> saleLists = saleService.findAll();
 
         model.addAttribute("product", new Product());
         model.addAttribute("title", "Add Product");
         model.addAttribute("categoryLists", categoryLists);
+        model.addAttribute("saleLists", saleLists);
 
         return "admin/product/create";
     }
@@ -64,12 +77,23 @@ public class ProductControllerAdmin {
     @PostMapping("/store")
     public String store(
             Product product,
-            RedirectAttributes ra
+            RedirectAttributes ra,
+            @RequestParam(name = "_image") MultipartFile file
     ) {
-        ra.addFlashAttribute("msg", "Create Success");
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        try {
+            Path path = Paths.get(UPLOAD_DIR);
+
+            product.setImage("/admin/images/product/" + fileName);
+
+            Files.copy(file.getInputStream(), path.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         productService.save(product);
 
+        ra.addFlashAttribute("msg", "Create Success");
         return "redirect:/admin/product";
     }
 

@@ -210,7 +210,7 @@
   $(document).ready(function () {
     $("#top-search").on("keyup", function () {
       let value = $(this).val().toLowerCase();
-      $("#tableData tr").filter(function () {
+      $("#tableData tr:not(.test)").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });

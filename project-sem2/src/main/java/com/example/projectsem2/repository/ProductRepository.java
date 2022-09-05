@@ -25,9 +25,34 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("select t from Product t where t.categoryById = ?1")
     Optional<Product> findProductByCategoryID(Category category);
 
-    @Query(value = "select * from Product Order By :sortField DESC", nativeQuery = true)
-    List<Product> sortAllProductDesc(String sortField);
+    // String sortField
+    @Query(value = "select p from Product p Order By p.id DESC")
+    List<Product> sortAllProductOrderByIdDesc();
 
-    @Query(value = "select * from Product Order By :sortField ASC", nativeQuery = true)
-    List<Product> sortAllProductAsc(String sortField);
+    @Query(value = "select p from Product p Order By p.id ASC")
+    List<Product> sortAllProductOrderByIdAsc();
+
+    @Query(value = "select p from Product p Order By p.name DESC")
+    List<Product> sortAllProductOrderByNameDesc();
+
+    @Query(value = "select p from Product p Order By p.name ASC")
+    List<Product> sortAllProductOrderByNameAsc();
+
+    @Query(value = "select p from Product p Order By p.price DESC")
+    List<Product> sortAllProductOrderByPriceDesc();
+
+    @Query(value = "select p from Product p Order By p.price ASC")
+    List<Product> sortAllProductOrderByPriceAsc();
+
+    @Query(value = "select p from Product p Order By p.sale.percent DESC")
+    List<Product> sortAllProductOrderBySaleDesc();
+
+    @Query(value = "select p from Product p Order By p.sale.percent ASC")
+    List<Product> sortAllProductOrderBySaleAsc();
+
+    @Query(value = "select p from Product p Order By p.createdAt DESC")
+    List<Product> sortAllProductOrderByCreatedAtDesc();
+
+    @Query(value = "select p from Product p Order By p.createdAt ASC")
+    List<Product> sortAllProductOrderByCreatedAtAsc();
 }

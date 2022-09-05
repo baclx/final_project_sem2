@@ -20,6 +20,42 @@ public class ProductServiceImplAdmin implements CrudService<Product> {
         return productRepository.findAll();
     }
 
+    public List<Product> sort(
+            String sortField,
+            String sortDir
+    ) {
+        switch (sortField) {
+            case "id":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByIdDesc();
+                }
+                return productRepository.sortAllProductOrderByIdAsc();
+            case "name":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByNameDesc();
+                }
+                return productRepository.sortAllProductOrderByNameAsc();
+            case "price":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByPriceDesc();
+                }
+                return productRepository.sortAllProductOrderByPriceAsc();
+            case "sale":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderBySaleDesc();
+                }
+                return productRepository.sortAllProductOrderBySaleAsc();
+            case "createdAt":
+                if (sortDir.equals("desc")) {
+                    return productRepository.sortAllProductOrderByCreatedAtDesc();
+                }
+                return productRepository.sortAllProductOrderByCreatedAtAsc();
+        }
+
+//        return productRepository.sortAllProductAsc(sortField);
+        return productRepository.findAll();
+    }
+
     @Override
     public void save(Product product) {
         productRepository.save(product);

@@ -1,7 +1,9 @@
 package com.example.projectsem2.controller.admin;
 
 import com.example.projectsem2.model.Order;
+import com.example.projectsem2.model.OrderDetail;
 import com.example.projectsem2.model.Status;
+import com.example.projectsem2.service.impl.OrderDetailServiceImplAdmin;
 import com.example.projectsem2.service.impl.OrderServiceImplAdmin;
 import com.example.projectsem2.service.impl.StatusServiceImplAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +27,43 @@ public class OrderControllerAdmin {
     @Autowired
     StatusServiceImplAdmin statusService;
 
+    @Autowired
+    OrderDetailServiceImplAdmin orderDetailService;
+
     @GetMapping("")
     public String index(
             Model model
     ) {
+        Long allOrder = orderService.countAllOrder();
+        Long allOrderDone = orderService.countAllOrderStatusDone();
+        Long allOrderNotDone = orderService.countAllOrderStatusNotDone();
+
         model.addAttribute("title", "Order");
+        model.addAttribute("allOrder", allOrder);
+        model.addAttribute("allOrderDone", allOrderDone);
+        model.addAttribute("allOrderNotDone", allOrderNotDone);
 
         return "admin/order/index";
+    }
+
+    @GetMapping("show/{id}")
+    public String show(
+            @PathVariable("id") Long id,
+            Model model,
+            HttpServletRequest request,
+            RedirectAttributes ra
+    ) {
+        Optional<OrderDetail> optionalOrderDetail = orderDetailService.findOrderDetailByOrderId(id);
+
+        if (optionalOrderDetail.isPresent()) {
+            model.addAttribute("order", optionalOrderDetail.get());
+            model.addAttribute("title", "Order Details");
+            return "admin/order/show";
+        }
+
+        ra.addFlashAttribute("err", "Not Found");
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
     @GetMapping("orderNotDone")

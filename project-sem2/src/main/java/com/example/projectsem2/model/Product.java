@@ -32,9 +32,8 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="sale_id",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="sale_id", referencedColumnName = "id")
     private Sale sale;
 
     public Sale getSale() {

@@ -85,23 +85,45 @@
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav ml-auto p-4">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="menu.html" class="nav-item nav-link">Menu</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="Login.html" class="dropdown-item">Login</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+            <div class="navbar-collapse collapse justify-content-center" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto p-4">
+                    <li class="nav-item">
+                        <a href="index.html" class=" nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item "> <a href="service.html" class="nav-link">Service</a></li>
+                    <li class="nav-item"> <a href="menu.html" class="nav-link">Menu</a></li>
+                    <li class="nav-item"> <a href="contact.html" class="nav-link">Contact</a></li>
+                    <li th:switch="${currentUserId}">
+                        <ul class="d-flex mr-4" th:case="'0'">
+                            <li class="nav-item " style="list-style: none"><a class="nav-link" th:href="@{/login}"><span>Sign in</span></a></li>
+                            <li class="nav-item " style="list-style: none"><a class="nav-link" th:href="@{/register}"><span>Sign up</span></a></li>
+                        </ul>
 
+                        <ul th:case="*" class="dropdown show">
+                            <li class="nav-item cta  "
+                                style="list-style: none">
+                                <a class="btn btn-outline-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   th:href="@{/logout}" th:text="${currentUser.username}">
+                                </a>
+                            <li class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+<!--                                <a class="dropdown-item" th:href="@{'/userInfo'(userId=${currentUserId})}">Account</a>-->
+                                <a class="dropdown-item">Account</a>
+                                <a class="dropdown-item" th:href="@{/logout}">Sign out</a>
+                            </li>
+                            </li>
+                        </ul>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu text-capitalize">
+                                <a href="Login.html" class="dropdown-item">Login</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
                         </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-
-                </div>
+                    </li>
+                </ul>
                 <div class="icon" style="
                          font-size: 18px;
                          color: black;

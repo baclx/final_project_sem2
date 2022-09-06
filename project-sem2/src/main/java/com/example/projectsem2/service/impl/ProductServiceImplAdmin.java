@@ -79,4 +79,8 @@ public class ProductServiceImplAdmin implements CrudService<Product> {
     public Optional<Product> findProductByCategoryID(Category category) {
         return productRepository.findProductByCategoryID(category);
     }
+
+    public Long countAllProduct() {
+        return productRepository.countAllProduct();
+    }
 }

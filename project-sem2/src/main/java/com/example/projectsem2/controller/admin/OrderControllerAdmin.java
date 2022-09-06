@@ -7,6 +7,7 @@ import com.example.projectsem2.service.impl.OrderDetailServiceImplAdmin;
 import com.example.projectsem2.service.impl.OrderServiceImplAdmin;
 import com.example.projectsem2.service.impl.StatusServiceImplAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("admin/order")
@@ -66,14 +66,51 @@ public class OrderControllerAdmin {
         return "redirect:"+ referer;
     }
 
-    @GetMapping("orderNotDone")
-    public String orderNotDone(
+    @GetMapping("/orderNotDone/page/1/")
+    public String pagination(
             Model model
     ) {
-        List<Order> orderLists = orderService.findAllByOrderByIdDesc();
+        return orderNotDone(model, 1);
+    }
 
+    @GetMapping("orderNotDone/page/{pageNumber}")
+    public String orderNotDone(
+            Model model,
+            @PathVariable("pageNumber") int currentPage
+    ) {
+        // pagination
+        Page<Order> page = orderService.pagination(currentPage);
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+
+//        List<Order> orderLists = orderService.findAllByOrderByIdDesc();
+
+        List<Order> orderLists = page.getContent();
+
+        List<Order> arraylist = new ArrayList<>(orderLists);
+
+        List<Order> listOrder = new ArrayList<>();
+
+//        for (Iterator<Order> iterator = arraylist.iterator(); iterator.hasNext();) {
+//            Order order = iterator.next();
+//            if(order.getStatusByStatusId().getName().equals("Done")) {
+//                iterator.remove();
+//            } else {
+//                listOrder.add(order);
+//            }
+//        }
+
+        for (Order order : arraylist) {
+            if (!Objects.equals(order.getStatusByStatusId().getName(), "Done")) {
+                listOrder.add(order);
+            }
+        }
+        model.addAttribute("orderLists", listOrder);
         model.addAttribute("title", "Order Pending...");
-        model.addAttribute("orderLists", orderLists);
 
         return "admin/order/notDone/index";
     }

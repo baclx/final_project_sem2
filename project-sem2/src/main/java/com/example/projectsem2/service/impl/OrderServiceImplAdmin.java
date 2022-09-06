@@ -3,8 +3,10 @@ package com.example.projectsem2.service.impl;
 import com.example.projectsem2.model.Order;
 import com.example.projectsem2.repository.OrderRepository;
 import com.example.projectsem2.service.CrudService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +60,10 @@ public class OrderServiceImplAdmin implements CrudService<Order> {
 
     public Long countAllOrderStatusNotDone() {
         return orderRepository.countAllOrderStatusNotDone();
+    }
+
+    public Page<Order> pagination(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 2);
+        return orderRepository.findAll(pageable);
     }
 }

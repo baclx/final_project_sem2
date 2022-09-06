@@ -49,4 +49,8 @@ public class UserServiceImplAdmin implements CrudService<User>, UserService {
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    public Long countAllUser() {
+        return userRepository.countAllUser();
+    }
 }

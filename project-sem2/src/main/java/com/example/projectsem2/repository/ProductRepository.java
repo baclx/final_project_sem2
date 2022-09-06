@@ -55,4 +55,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query(value = "select p from Product p Order By p.createdAt ASC")
     List<Product> sortAllProductOrderByCreatedAtAsc();
+
+    @Query("SELECT count(p.id) from Product p")
+    Long countAllProduct();
 }

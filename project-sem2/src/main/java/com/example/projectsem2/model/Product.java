@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
-
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@Getter
+@Setter
 public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,18 +32,9 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="sale_id",referencedColumnName = "id")
     private Sale sale;
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
 
     @Basic
     @Column(name = "created_at")
@@ -62,82 +53,9 @@ public class Product {
     private Category categoryById;
 
     @OneToMany(mappedBy = "productByProductId")
+    @JsonIgnore
     private Collection<Review> reviewsById;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-
-
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Collection<OrderDetail> getOrderDetailsById() {
-        return orderDetailsById;
-    }
-
-    public void setOrderDetailsById(Collection<OrderDetail> orderDetailsById) {
-        this.orderDetailsById = orderDetailsById;
-    }
-
-    public Category getCategoryById() {
-        return categoryById;
-    }
-
-    public void setCategoryById(Category categoryById) {
-        this.categoryById = categoryById;
-    }
-
-    public Collection<Review> getReviewsById() {
-        return reviewsById;
-    }
-
-    public void setReviewsById(Collection<Review> reviewsById) {
-        this.reviewsById = reviewsById;
-    }
     public double getPriceAfterSale(double price, Sale sale){
         int sale_id = sale.getId();
         switch (sale_id){

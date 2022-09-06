@@ -1,12 +1,16 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Data
+@Setter
+@Getter
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,5 +22,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "categoryById")
+    @JsonIgnore
     private Collection<Product> productsById;
 }

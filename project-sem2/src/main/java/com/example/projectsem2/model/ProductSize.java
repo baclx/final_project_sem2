@@ -1,5 +1,6 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,5 +17,6 @@ public class ProductSize {
     @Column(name = "name")
     private char name;
     @OneToMany(mappedBy = "sizeBySizeId")
+    @JsonIgnore
     private Collection<OrderDetail> orderDetailById;
 }

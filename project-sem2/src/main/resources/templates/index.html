@@ -44,6 +44,7 @@
         .product_detail{
             float: left;
         }
+
         .modal-body {
             background-color: #fff;
             border-color: #fff;
@@ -302,7 +303,9 @@
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${p.name}">Green Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
+
                             <button type="button" th:id="${p.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch"  data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+
                         </div>
 
                     </div>
@@ -315,7 +318,7 @@
 
 
     <!--MODAL-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade"  data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body ">
@@ -512,11 +515,6 @@
         -->
     </div>
     <!-- Footer End -->
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 
     <!-- Back to Top -->

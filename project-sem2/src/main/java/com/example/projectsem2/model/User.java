@@ -39,7 +39,7 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "userByUserId")
-    private Collection<Orders> ordersById;
+    private Collection<Order> ordersById;
 
     @OneToMany(mappedBy = "userByUserId")
     private Collection<Review> reviewsById;

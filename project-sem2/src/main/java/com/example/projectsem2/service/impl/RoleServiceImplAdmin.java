@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RoleServiceImpl implements CrudService<Role> {
+public class RoleServiceImplAdmin implements CrudService<Role> {
     @Autowired
     RoleRepository roleRepository;
 

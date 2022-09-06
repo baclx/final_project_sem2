@@ -106,7 +106,7 @@
                             <li class="nav-item cta  "
                                 style="list-style: none">
                                 <a class="btn btn-outline-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                   th:href="@{/logout}" th:text="${currentUser.username}">
+                                   th:href="@{/logout}" th:text="${username}">
                                 </a>
                             <li class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 <!--                                <a class="dropdown-item" th:href="@{'/userInfo'(userId=${currentUserId})}">Account</a>-->
@@ -115,13 +115,6 @@
                             </li>
                             </li>
                         </ul>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu text-capitalize">
-                                <a href="Login.html" class="dropdown-item">Login</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
                     </li>
                 </ul>
                 <div class="icon" style="
@@ -292,7 +285,6 @@
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${p.image}}" id="image" alt="">
                             <h5 class="menu-price" th:text="${p.getPriceAfterSale(p.price,p.sale)}+' đ'"></h5>
-
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${p.name}"></h4>
@@ -524,62 +516,6 @@
     </div>
     <!-- Footer End -->
 
-    <!--MODAL-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body ">
-                    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
-
-                    <div class="px-4 py-5">
-
-                        <h5 class="text-uppercase">Jonathan Adler</h5>
-                        <h4 class="mt-5 theme-color mb-5">Thanks for your order</h4>
-
-                        <span class="theme-color">Payment Summary</span>
-                        <div class="mb-3">
-                            <hr class="new1">
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span class="font-weight-bold">Ether Chair(Qty:1)</span>
-                            <span class="text-muted">$1750.00</span>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <small>Shipping</small>
-                            <small>$175.00</small>
-                        </div>
-
-
-                        <div class="d-flex justify-content-between">
-                            <small>Tax</small>
-                            <small>$200.00</small>
-                        </div>
-
-                        <div class="d-flex justify-content-between mt-3">
-                            <span class="font-weight-bold">Total</span>
-                            <span class="font-weight-bold theme-color">$2125.00</span>
-                        </div>
-
-
-
-                        <div class="text-center mt-5">
-
-
-                            <button class="btn btn-primary">Track your order</button>
-
-
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -588,25 +524,21 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script th:src="@{../lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
+    <script th:src="@{../lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
+    <script th:src="@{../lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script th:src="@{../lib/tempusdominus/js/moment.min.j}" src="lib/tempusdominus/js/moment.min.js"></script>
+    <script th:src="@{../lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script th:src="@{../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script th:src="@{../mail/jqBootstrapValidation.min.js}" src="mail/jqBootstrapValidation.min.js"></script>
+    <script th:src="@{../mail/contact.js}" src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script th:src="@{../js/main.js}" src="js/main.js"></script>
 
     <script type="text/javascript">
-        // const $$ = document.querySelectorAll.bind(document);
-        // const $ = document.querySelector.bind(document);
-        // const  btnOrder = $$('#Btn_order')
-        // var orderImage = $('#order_image');
         var orderImage = document.getElementById('order_image')
         var productName = document.getElementById('product_name')
         var productNewPrice = document.getElementById('product_new_price')

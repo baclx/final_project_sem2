@@ -1,12 +1,18 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "sale", schema = "sb_project_sem2")
 
 public class Sale {
@@ -19,7 +25,9 @@ public class Sale {
     private String percent;
 
     @OneToMany(mappedBy = "sale")
-    private Collection<Product> product;
+    @JsonIgnore
+    private Collection<Product> products;
+
 
 
 }

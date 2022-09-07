@@ -32,6 +32,7 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="sale_id",referencedColumnName = "id")
     private Sale sale;

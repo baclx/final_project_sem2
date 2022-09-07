@@ -2,8 +2,8 @@ package com.example.projectsem2.controller.admin;
 
 import com.example.projectsem2.model.Role;
 import com.example.projectsem2.model.User;
-import com.example.projectsem2.service.impl.RoleServiceImpl;
-import com.example.projectsem2.service.impl.UserServiceImpl;
+import com.example.projectsem2.service.impl.RoleServiceImplAdmin;
+import com.example.projectsem2.service.impl.UserServiceImplAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,12 +18,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/user")
-public class UserController {
+public class UserControllerAdmin {
     @Autowired
-    UserServiceImpl userService;
+    UserServiceImplAdmin userService;
 
     @Autowired
-    RoleServiceImpl roleService;
+    RoleServiceImplAdmin roleService;
 
 //    @Autowired
 //    GetInfo getInfo;

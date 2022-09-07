@@ -10,7 +10,6 @@ import com.example.projectsem2.model.Role;
 import com.example.projectsem2.model.User;
 import com.example.projectsem2.repository.RoleRepository;
 import com.example.projectsem2.repository.UserRepository;
-import com.example.projectsem2.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

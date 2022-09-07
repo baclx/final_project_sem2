@@ -3,8 +3,7 @@ package com.example.projectsem2.controller.view;
 import com.example.projectsem2.model.Product;
 import com.example.projectsem2.model.ShoppingCard;
 import com.example.projectsem2.model.User;
-import com.example.projectsem2.service.UserService;
-import com.example.projectsem2.service.impl.UserServiceImpl;
+import com.example.projectsem2.service.impl.UserServiceImplAdmin;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
 import com.example.projectsem2.service.implement.ShoppingCardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class HomeControllerView {
     @Autowired
     ProductServiceImpl productService;
     @Autowired
-    UserServiceImpl userService;
+    UserServiceImplAdmin userService;
     public Long getcurrentUserId(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email;

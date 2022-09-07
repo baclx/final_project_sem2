@@ -18,5 +18,5 @@ public class Payment {
     private String type;
 
     @OneToMany(mappedBy = "paymentByPaymentId")
-    private Collection<Orders> ordersById;
+    private Collection<Order> ordersById;
 }

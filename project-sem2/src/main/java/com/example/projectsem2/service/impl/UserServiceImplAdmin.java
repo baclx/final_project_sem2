@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements CrudService<User>, UserService {
+public class UserServiceImplAdmin implements CrudService<User>, UserService {
     @Autowired
     UserRepository userRepository;
 
@@ -48,5 +48,9 @@ public class UserServiceImpl implements CrudService<User>, UserService {
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public Long countAllUser() {
+        return userRepository.countAllUser();
     }
 }

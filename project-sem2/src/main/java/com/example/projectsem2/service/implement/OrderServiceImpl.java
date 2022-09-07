@@ -1,6 +1,7 @@
 package com.example.projectsem2.service.implement;
 
-import com.example.projectsem2.model.Orders;
+
+import com.example.projectsem2.model.Order;
 import com.example.projectsem2.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,27 +12,27 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Override
-    public List<Orders> getAllOrder() {
+    public List<Order> getAllOrder() {
         return null;
     }
 
     @Override
-    public ResponseEntity<Orders> getOrderById(Long id) {
+    public ResponseEntity<Order> getOrderById(Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Orders> updateOrderById(Orders orders, Long id) {
+    public ResponseEntity<Order> updateOrderById(Order orders, Long id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Orders> deleteOrderById(Long id) {
+    public ResponseEntity<Order> deleteOrderById(Long id) {
         return null;
     }
 
     @Override
-    public Orders saveOrder(Orders orders) {
+    public Order saveOrder(Order orders) {
         return null;
     }
 }

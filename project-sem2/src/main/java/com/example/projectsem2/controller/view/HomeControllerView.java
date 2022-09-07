@@ -1,16 +1,19 @@
 package com.example.projectsem2.controller.view;
 
 import com.example.projectsem2.model.Product;
+import com.example.projectsem2.model.ShoppingCard;
 import com.example.projectsem2.model.User;
 import com.example.projectsem2.service.UserService;
 import com.example.projectsem2.service.impl.UserServiceImpl;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
+import com.example.projectsem2.service.implement.ShoppingCardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +70,6 @@ public class HomeControllerView {
         model.addAttribute("sale25",top3Sale25);
         return "index";
     }
+
 
 }

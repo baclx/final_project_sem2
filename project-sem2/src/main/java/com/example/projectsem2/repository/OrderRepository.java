@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 
 public interface OrderRepository extends JpaRepository<Order,Long>, PagingAndSortingRepository<Order, Long> {
-    @Query("select o from Order o where o.statusByStatusId.name in ('Cancelled', 'Pending') order by o.createdAt desc")
+    @Query("select o from Order o order by o.id desc")
     List<Order> findAllByOrderByIdDesc();
 
     @Query("select o from Order o where o.statusByStatusId.name = 'Done'")

@@ -6,6 +6,7 @@ import com.example.projectsem2.model.Status;
 import com.example.projectsem2.service.impl.OrderDetailServiceImplAdmin;
 import com.example.projectsem2.service.impl.OrderServiceImplAdmin;
 import com.example.projectsem2.service.impl.StatusServiceImplAdmin;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("admin/order")
@@ -66,15 +69,15 @@ public class OrderControllerAdmin {
         return "redirect:"+ referer;
     }
 
-    @GetMapping("/orderNotDone/page/1/")
+    @GetMapping("/page/1/")
     public String pagination(
             Model model
     ) {
-        return orderNotDone(model, 1);
+        return orderPagination(model, 1);
     }
 
-    @GetMapping("orderNotDone/page/{pageNumber}")
-    public String orderNotDone(
+    @GetMapping("/page/{pageNumber}")
+    public String orderPagination(
             Model model,
             @PathVariable("pageNumber") int currentPage
     ) {
@@ -87,29 +90,15 @@ public class OrderControllerAdmin {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalItems", totalItems);
 
-//        List<Order> orderLists = orderService.findAllByOrderByIdDesc();
+        List<Order> orderLists = new ArrayList<>(page.getContent());
 
-        List<Order> orderLists = page.getContent();
+//        List<Order> list = orderLists.stream()
+//                .sorted(Comparator.comparing(Order::getId).reversed())
+//                .collect(Collectors.toList());
 
-        List<Order> arraylist = new ArrayList<>(orderLists);
+//        Collections.reverse(orderLists);
 
-        List<Order> listOrder = new ArrayList<>();
-
-//        for (Iterator<Order> iterator = arraylist.iterator(); iterator.hasNext();) {
-//            Order order = iterator.next();
-//            if(order.getStatusByStatusId().getName().equals("Done")) {
-//                iterator.remove();
-//            } else {
-//                listOrder.add(order);
-//            }
-//        }
-
-        for (Order order : arraylist) {
-            if (!Objects.equals(order.getStatusByStatusId().getName(), "Done")) {
-                listOrder.add(order);
-            }
-        }
-        model.addAttribute("orderLists", listOrder);
+        model.addAttribute("orderLists", orderLists);
         model.addAttribute("title", "Order Pending...");
 
         return "admin/order/notDone/index";
@@ -150,7 +139,13 @@ public class OrderControllerAdmin {
 
         Optional<Status> optionalStatus = statusService.findById(4L);
 
-        return upgradeStatus(request, ra, optionalOrder, optionalStatus);
+        if (optionalOrder.isPresent() && !optionalOrder.get().getStatusByStatusId().getName().equals("Done")) {
+            return upgradeStatus(request, ra, optionalOrder, optionalStatus);
+        }
+
+        ra.addFlashAttribute("err", "Not Update Status Done");
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
     private String upgradeStatus(
@@ -160,9 +155,12 @@ public class OrderControllerAdmin {
             Optional<Status> optionalStatus
     ) {
 
-        if (optionalOrder.isPresent()) {
-            optionalOrder.get().setStatusByStatusId(optionalStatus.get());
-            orderService.save(optionalOrder.get());
+        if (optionalOrder.isPresent() && optionalStatus.isPresent()) {
+            if (!optionalOrder.get().getStatusByStatusId().equals(optionalStatus.get())) {
+                ra.addFlashAttribute("msg", "Update Success");
+                optionalOrder.get().setStatusByStatusId(optionalStatus.get());
+                orderService.save(optionalOrder.get());
+            }
             String referer = request.getHeader("Referer");
             return "redirect:"+ referer;
         }

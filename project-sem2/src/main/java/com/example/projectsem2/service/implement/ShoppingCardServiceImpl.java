@@ -78,6 +78,8 @@ public class ShoppingCardServiceImpl implements ShoppingCardService {
     }
 
 
-
+    public ShoppingCard findById(Long id){
+        return shoppingCardRepository.findById(id).get();
+    }
 
 }

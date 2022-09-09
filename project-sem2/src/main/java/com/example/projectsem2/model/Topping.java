@@ -1,11 +1,14 @@
 package com.example.projectsem2.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
 @Entity
-@Data
+@Getter
+@Setter
 public class Topping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

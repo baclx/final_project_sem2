@@ -1,12 +1,15 @@
 package com.example.projectsem2.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "order_detail", schema = "sb_project_sem2", catalog = "")
 public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +52,6 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private Product productByProductId;
-
 
     @ManyToOne
     @JoinColumn(name = "size_id", referencedColumnName = "id")

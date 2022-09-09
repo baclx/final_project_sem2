@@ -28,7 +28,6 @@
             <th>% Đường</th>
             <th>Size</th>
             <th>Topping</th>
-            <th>Type</th>
             <th>Sale</th>
             <th>Quantity</th>
             <th>Price</th>
@@ -42,7 +41,6 @@
                 <td>[[*{sugarBySugarId.percent}]]</td>
                 <td>[[*{sizeBySizeId.name}]]</td>
                 <td>[[*{toppingByToppingId.topping}]]</td>
-                <td>[[*{typeByTypeId.name}]]</td>
                 <td>[[*{sale}]]%</td>
                 <td>[[*{quantity}]]</td>
                 <td th:text="*{#numbers.formatDecimal(price, 0, 'POINT', 0, 'POINT')} + đ"></td>

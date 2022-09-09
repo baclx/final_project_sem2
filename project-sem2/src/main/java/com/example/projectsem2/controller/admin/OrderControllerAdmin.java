@@ -52,21 +52,13 @@ public class OrderControllerAdmin {
     @GetMapping("show/{id}")
     public String show(
             @PathVariable("id") Long id,
-            Model model,
-            HttpServletRequest request,
-            RedirectAttributes ra
+            Model model
     ) {
-        Optional<OrderDetail> optionalOrderDetail = orderDetailService.findOrderDetailByOrderId(id);
+        List<OrderDetail> orderDetailLists = orderDetailService.findOrderDetailByOrderId(id);
 
-        if (optionalOrderDetail.isPresent()) {
-            model.addAttribute("order", optionalOrderDetail.get());
-            model.addAttribute("title", "Order Details");
-            return "admin/order/show";
-        }
-
-        ra.addFlashAttribute("err", "Not Found");
-        String referer = request.getHeader("Referer");
-        return "redirect:"+ referer;
+        model.addAttribute("orders", orderDetailLists);
+        model.addAttribute("title", "Order Details");
+        return "admin/order/show";
     }
 
     @GetMapping("/page/1/")

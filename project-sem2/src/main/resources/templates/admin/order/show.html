@@ -32,18 +32,30 @@
             <th>Quantity</th>
             <th>Price</th>
         </tr>
-        <th:block th:object="${order}">
+        <th:block th:each="order : ${orders}">
             <tr>
-                <td>[[*{id}]]</td>
-                <td>[[*{orderByOrderId.id}]]</td>
-                <td>[[*{productByProductId.name}]]</td>
-                <td>[[*{iceByIceId.percent}]]</td>
-                <td>[[*{sugarBySugarId.percent}]]</td>
-                <td>[[*{sizeBySizeId.name}]]</td>
-                <td>[[*{toppingByToppingId.topping}]]</td>
-                <td>[[*{sale}]]%</td>
-                <td>[[*{quantity}]]</td>
-                <td th:text="*{#numbers.formatDecimal(price, 0, 'POINT', 0, 'POINT')} + đ"></td>
+                <td>[[${order.id}]]</td>
+                <th:block th:each="k : ${order.orderByOrderId}">
+                    <td>[[${k.id}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.productByProductId}">
+                    <td>[[${k.name}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.iceByIceId}">
+                    <td>[[${k.percent}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.sugarBySugarId}">
+                    <td>[[${k.percent}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.sizeBySizeId}">
+                    <td>[[${k.name}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.toppingByToppingId}">
+                    <td>[[${k.topping}]]</td>
+                </th:block>
+                <td>[[${order.sale}]]%</td>
+                <td>[[${order.quantity}]]</td>
+                <td th:text="*{#numbers.formatDecimal(order.price, 0, 'POINT', 0, 'POINT')} + đ"></td>
             </tr>
         </th:block>
     </table>

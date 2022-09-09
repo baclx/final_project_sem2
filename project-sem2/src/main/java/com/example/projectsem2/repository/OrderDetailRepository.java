@@ -22,5 +22,5 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail,Long> {
     Long countByProductByProductId(Product product);
 
     @Query("select od from OrderDetail od where od.orderByOrderId.id = ?1")
-    Optional<OrderDetail> findOrderDetailByOrderId(Long id);
+    List<OrderDetail> findOrderDetailByOrderId(Long id);
 }

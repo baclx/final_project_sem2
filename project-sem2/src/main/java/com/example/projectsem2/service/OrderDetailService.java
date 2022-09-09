@@ -8,4 +8,5 @@ public interface OrderDetailService {
     List<OrderDetail> getAllOrderDetail();
     List<OrderDetail> getReceiptUserId(Long userId);
 
+    OrderDetail saveOrderDetail(OrderDetail orderDetail);
 }

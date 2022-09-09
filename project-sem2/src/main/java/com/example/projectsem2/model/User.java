@@ -1,7 +1,9 @@
 package com.example.projectsem2.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -9,9 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

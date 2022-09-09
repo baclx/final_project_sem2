@@ -33,14 +33,7 @@
         .close:hover {
             color: #000;
         }
-        .theme-color{
 
-            color: #004cb9;
-        }
-        hr.new1 {
-            border-top: 2px dashed #fff;
-            margin: 0.4rem 0;
-        }
 
     </STYLE>
 </head>
@@ -319,10 +312,9 @@
                             <div th:each="topping:${toppings}">
                                 <p><input name="topping" type="radio" th:value="*{topping.topping}" th:text="*{topping.topping}"></p>
                             </div>
-                            <input type="hidden" name="userId" th:value="${currentUserId}" th:text="${currentUserId}" id="userId">
+                            <input type="hidden" name="userId" th:value="${currentUserId}"  id="userId">
                             <input type="hidden" name="productName" id="productName">
                             <input type="hidden" name="productPrice" id="productPrice">
-<!--                            <input class="btn btn-primary font-weight-bold py-2 px-4 mt-2" type="submit" value="Order Now" name="submit">-->
                             <button class="btn btn-default btn-success" onclick="form_submit()" type="submit" name="submit" value="Submit">Order Now</button>
                         </form>
 

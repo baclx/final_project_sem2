@@ -43,7 +43,7 @@ public class OrderControllerView {
         Order order = new Order();
         User user = userService.findById(demo.getUserId()).get();
         order.setUserByUserId(user);
-        order.setStatusByStatusId(statusRepository.findByName("pending"));
+        order.setStatusByStatusId(statusRepository.findByName("Pending"));
         orderService.saveOrder(order);
         System.out.println(order);
         OrderDetail orderDetail = new OrderDetail();

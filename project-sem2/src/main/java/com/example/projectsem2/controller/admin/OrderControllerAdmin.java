@@ -124,7 +124,7 @@ public class OrderControllerAdmin {
     ) {
         Optional<Order> optionalOrder = orderService.findById(id);
 
-        Optional<Status> optionalStatus = statusService.findById(3L);
+        Optional<Status> optionalStatus = statusService.findByName("Done");
 
         return upgradeStatus(request, ra, optionalOrder, optionalStatus);
     }
@@ -137,7 +137,7 @@ public class OrderControllerAdmin {
     ) {
         Optional<Order> optionalOrder = orderService.findById(id);
 
-        Optional<Status> optionalStatus = statusService.findById(4L);
+        Optional<Status> optionalStatus = statusService.findByName("Cancelled");
 
         if (optionalOrder.isPresent() && !optionalOrder.get().getStatusByStatusId().getName().equals("Done")) {
             return upgradeStatus(request, ra, optionalOrder, optionalStatus);

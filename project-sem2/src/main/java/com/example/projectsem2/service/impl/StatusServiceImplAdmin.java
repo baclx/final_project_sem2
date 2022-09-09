@@ -31,7 +31,7 @@ public class StatusServiceImplAdmin implements CrudService<Status> {
 
     @Override
     public Optional<Status> findByName(String name) {
-        return Optional.empty();
+        return Optional.ofNullable(statusRepository.findByName(name));
     }
 
     @Override

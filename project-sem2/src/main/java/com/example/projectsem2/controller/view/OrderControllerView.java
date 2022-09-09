@@ -39,6 +39,8 @@ public class OrderControllerView {
     ToppingRepository toppingRepository;
     @Autowired
     ShoppingCardServiceImpl shoppingCardService;
+    @Autowired
+    PaymentRepository paymentRepository;
 
 
     @GetMapping("/addOrder")
@@ -51,6 +53,8 @@ public class OrderControllerView {
         });
         Order order = new Order();
         User user = userService.findById(userId).get();
+        Payment payment = paymentRepository.findByType("Thanh toán trực tiếp");
+        order.setPaymentByPaymentId(payment);
         order.setUserByUserId(user);
         order.setStatusByStatusId(statusRepository.findByName("Pending"));
         orderService.saveOrder(order);
@@ -73,8 +77,10 @@ public class OrderControllerView {
             orderDetailService.saveOrderDetail(orderDetail);
             orderDetails.add(orderDetail);
         });
-        
-        return "index";
+        cardIds.forEach(id->{
+            shoppingCardService.deleteShoppingCardById(id);
+        });
+        return "redirect:/index";
     }
 
 }

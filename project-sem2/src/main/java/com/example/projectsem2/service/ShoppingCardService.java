@@ -7,7 +7,13 @@ import java.util.List;
 public interface ShoppingCardService {
     List<ShoppingCard> getAllShoppingCard(Long userId);
 
-    ShoppingCard addShoppingcard(ShoppingCard shoppingCard);
+
 
     void deleteShoppingCardById(Long id);
+
+    ShoppingCard saveShoppingCard(ShoppingCard shoppingCard);
+
+    ShoppingCard updateShoppingCard(ShoppingCard shoppingCard, Long id);
+
+    ;
 }

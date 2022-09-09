@@ -1,8 +1,11 @@
 package com.example.projectsem2.controller.view;
 
-import com.example.projectsem2.model.Product;
-import com.example.projectsem2.model.ShoppingCard;
-import com.example.projectsem2.model.User;
+import com.example.projectsem2.dto.OrderDemo;
+import com.example.projectsem2.model.*;
+import com.example.projectsem2.repository.IceRepository;
+import com.example.projectsem2.repository.ProductSizeRepository;
+import com.example.projectsem2.repository.SugarRepository;
+import com.example.projectsem2.repository.ToppingRepository;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
 import com.example.projectsem2.service.implement.ShoppingCardServiceImpl;
@@ -24,17 +27,25 @@ public class HomeControllerView {
     ProductServiceImpl productService;
     @Autowired
     UserServiceImplAdmin userService;
+    @Autowired
+    IceRepository iceRepository;
+    @Autowired
+    SugarRepository sugarRepository;
+    @Autowired
+    ProductSizeRepository productSizeRepository;
+    @Autowired
+    ToppingRepository toppingRepository;
     public Long getcurrentUserId(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email;
+        String username;
         if (principal instanceof UserDetails) {
-            email = ((UserDetails) principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
 
         } else {
-            email = principal.toString();
+            username = principal.toString();
         }
-        Optional<com.example.projectsem2.model.User> opUsert = userService.findByEmail(email);
-        com.example.projectsem2.model.User u;
+        Optional<User> opUsert = userService.findByUsername(username);
+        User u;
         if(opUsert.isPresent()) {
             u = opUsert.get();
         } else {
@@ -60,7 +71,14 @@ public class HomeControllerView {
             String username = currentUser.getUsername();
             model.addAttribute("username",username);
         }
-
+        List<Topping> toppings = toppingRepository.findAll();
+        List<Ice> ices = iceRepository.findAll();
+        List<Sugar> sugars = sugarRepository.findAll();
+        List<ProductSize> sizes = productSizeRepository.findAll();
+        model.addAttribute("toppings",toppings);
+        model.addAttribute("ices",ices);
+        model.addAttribute("sugars",sugars);
+        model.addAttribute("sizes",sizes);
         List<Product> listSale25 = productService.getAllSale25();
         List<Product> top3Sale25 = new ArrayList<>();
         for(int i = 0; i <= 2; i++){

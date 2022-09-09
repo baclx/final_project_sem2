@@ -66,28 +66,35 @@
                     <th>Price</th>
                     </thead>
                     <tbody>
-                    <tr th:each="sc:${shoppingCards}">
+                    <input type="hidden" th:value="${userId}" id="userId">
+                    <tr th:each="sc:${shoppingCards}" >
                         <td>
                             <div class="cart-info">
-                                <a href="product1.html"><img  th:src="@{'/images/getimage/'+ ${sc.productImage}}"  width="100px" height="100px"></a>
+                                <a href="product1.html"><img  th:src="@{'/images/getimage/'+ ${sc.productImage}}" width="100px" height="100px"></a>
+                                <input type="hidden" th:value="${sc.productImage}" class="image">
                                 <div>
-                                    <p th:text="${sc.productName}"></p>
+                                    <small th:text="${sc.productName}" class="name"></small>
+                                     size<small th:text="${sc.size}" class="size"></small>
+                                     <small th:text="${sc.ice}" class="ice"></small>
+                                     <small th:text="${sc.sugar}" class="sugar"></small>
+                                     <small th:text="${sc.topping}" class="topping"></small>
+                                    <br>
                                     <small> In Stock</small>
                                     <a href="">delete</a>
                                 </div>
                             </div>
                         </td>
-                        <!--    <td class="buttons_added">
-                                <input class="minus is-form" type="button" value="-">
-                                <input aria-label="quantity" class="input-qty" max="Số tối đa" min="Số tối thiểu" name="" type="number" value="">
-                                <input class="plus is-form" type="button" value="+"> -->
-                        <td><input type="number" name="quantity" value="1" id="quantity"></td>
+                        <td><input type="number" name="quantity"  class="quantity" th:value="${sc.productQuantity}"></td>
+                        <input type="hidden" th:value="${sc.id}" class="cardId">
                         </td>
-                        <td th:text="${sc.productPrice}+' đ'" class="price"></td>
+                        <td  class="price"  ></td>
+                        <input type="hidden" th:value="${sc.productPrice}" class="productPrice">
+
                     </tr>
                     </tbody>
                 </table>
-                <div class="total-price">
+                <hr>
+                <div class="total-price" >
                     <table>
                         <tr>
                             <td th:text="'Total ('+ ${total}+' items)'"></td>
@@ -102,7 +109,7 @@
     <div class="checkout-section">
         <div class="checkout-box">
             <p class="text" th:text="'Total ('+ ${total}+' items)'"></p>
-            <h2 class="bill"></h2>
+            <h2 class="total-price" ></h2>
             <a href="checkout.html"class="checkout-btn">checkout</a>
         </div>
     </div>
@@ -172,7 +179,74 @@
 <!-- Template Javascript -->
 <script th:src="@{/../js/main.js}" src="js/main.js"></script>
 <script>
+    var quantity =  document.querySelectorAll.bind(document)('.quantity')
+    var productPrice = document.querySelectorAll.bind(document)('.productPrice')
+    var price = document.querySelectorAll.bind(document)('.price')
+    var total_price = document.querySelectorAll.bind(document)('.total-price')
+    var bill = document.getElementById('bill')
+    var userId = document.getElementById('userId').value
 
+    var productImage = document.querySelectorAll.bind(document)('.image')
+
+    var productName=document.querySelectorAll.bind(document)('.name')
+    var size=document.querySelectorAll.bind(document)('.size')
+    var sugar =document.querySelectorAll.bind(document)('.sugar')
+    var ice =document.querySelectorAll.bind(document)('.ice')
+    var topping = document.querySelectorAll.bind(document)('.topping')
+    var cardId = document.querySelectorAll.bind(document)('.cardId')
+
+    console.log(productPrice)
+    start();
+
+    function start(){
+        var bill = 0;
+        price.forEach((p,i)=>{
+        p.textContent = productPrice[i].value * quantity[i].value + ' đ'
+            document.querySelectorAll.bind(document)('.price')[i].textContent = p.textContent
+            bill = bill+ productPrice[i].value * quantity[i].value
+        })
+        total_price.forEach((tp,i)=>{
+            tp.textContent = bill + ' đ'
+        })
+    }
+    quantity.forEach((qty,i)=>{
+        qty.onchange = function (){
+            bill = 0
+
+            price[i].textContent =  productPrice[i].value * qty.value + ' đ'
+            document.querySelectorAll.bind(document)('.price')[i].textContent = price[i].textContent
+            start()
+
+            var data={
+                "userId" : userId,
+                "cardPrice":  productPrice[i].value * qty.value,
+                "productPrice":productPrice[i].value,
+                "productImage": productImage[i].value,
+                "productQuantity":qty.value,
+                "productName":productName[i].textContent,
+                "size":size[i].textContent,
+                "sugar":sugar[i].textContent,
+                "ice":ice[i].textContent,
+                "topping":topping[i].textContent
+            }
+            $.ajax({
+                url: "/api/shoppingcard/update/"+cardId[i].value,
+                type: "PUT",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                   alert("Thanh cong")
+                },
+                error: function (err) {
+                    alert("that bai")
+                }
+            })
+         }
+
+    })
+
+    console.log(bill)
 </script>
 </body>
 </html>

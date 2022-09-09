@@ -53,4 +53,8 @@ public class UserServiceImplAdmin implements CrudService<User>, UserService {
     public Long countAllUser() {
         return userRepository.countAllUser();
     }
+
+    public Optional<User> findByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
 }

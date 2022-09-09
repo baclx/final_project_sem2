@@ -18,14 +18,16 @@ public class ShoppingCard {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "product_image")
-    private String productImage;
-
     @Column(name = "product_price")
     private double productPrice;
 
+    @Column(name = "card_price")
+    private double cardPrice;
+    @Column(name = "product_image")
+    private String productImage;
+
     @Column(name = "product_quantity")
-    private int productQuantity;
+    private int productQuantity = 1;
 
     @Column(name = "product_name")
     private String productName;
@@ -41,6 +43,14 @@ public class ShoppingCard {
 
     @Column(name = "topping")
     private String topping;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
 
 }

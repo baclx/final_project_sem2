@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ShoppingCardRepository extends JpaRepository<ShoppingCard,Long> {
-
     List<ShoppingCard> getAllByUserId(Long userId);
 }

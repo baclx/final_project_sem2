@@ -1,6 +1,8 @@
 package com.example.projectsem2.model;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,8 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-
-@Table(name = "Orders")
+@Table(name = "orders")
 public class Order {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +20,12 @@ public class Order {
 
 
     @Basic
+    @CreationTimestamp
     @Column(name = "created_at")
     private Timestamp createdAt;
 
     @Basic
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 

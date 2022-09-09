@@ -54,7 +54,7 @@ public class HomeControllerView {
         Long currentUserId = u.getId();
         return currentUserId;
     }
-    @GetMapping(value = {"/","/index","/home"})
+    @GetMapping(value = {"/index","/home", "/"})
     public String showIndex(Model model){
         List<Product> topProduct = productService.getTopSeller();
         //Get top 4

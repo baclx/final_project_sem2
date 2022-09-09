@@ -109,7 +109,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/test/all").access("hasAuthority('ROLE_USER')");
         http.authorizeRequests().antMatchers("/api/test/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/api/test/product").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/").access("hasRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
 //        http.authorizeRequests().antMatchers("/test").access("hasAuthority('ROLE_USER')");
 
@@ -120,7 +119,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                j_spring_security_check
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
-                .defaultSuccessUrl("/index", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")

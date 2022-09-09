@@ -254,7 +254,7 @@
                     <div class="row align-items-center mb-5" th:each="p: ${products}">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${p.image}}" id="image" alt="">
-                            <h5 class="menu-price" th:text="${p.getPriceAfterSale(p.price,p.sale)}+' đ'"></h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(p.getPriceAfterSale(p.price,p.sale), 0, 'POINT', 0, 'POINT')}+' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${p.name}"></h4>
@@ -269,7 +269,7 @@
                     <div class="row align-items-center mb-5" th:each="p:${sale25}">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${p.image}}" src="img/b4.png" alt="">
-                            <h5 class="menu-price" th:text="${p.getPriceAfterSale(p.price,p.sale)}+' đ'">$5</h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(p.getPriceAfterSale(p.price,p.sale), 0, 'POINT', 0, 'POINT')}+' đ'">$5</h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${p.name}">Green Coffee</h4>

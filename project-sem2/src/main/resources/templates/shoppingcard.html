@@ -67,6 +67,7 @@
                     </thead>
                     <tbody>
                     <input type="hidden" th:value="${userId}" id="userId">
+
                     <tr th:each="sc:${shoppingCards}" >
                         <td>
                             <div class="cart-info">
@@ -87,9 +88,8 @@
                         <td><input type="number" name="quantity"  class="quantity" th:value="${sc.productQuantity}"></td>
                         <input type="hidden" th:value="${sc.id}" class="cardId">
                         </td>
-                        <td  class="price"  ></td>
+                        <td class="price"></td>
                         <input type="hidden" th:value="${sc.productPrice}" class="productPrice">
-
                     </tr>
                     </tbody>
                 </table>
@@ -107,10 +107,12 @@
     </div>
 
     <div class="checkout-section">
-        <div class="checkout-box">
+        <div class="checkout-box" >
             <p class="text" th:text="'Total ('+ ${total}+' items)'"></p>
-            <h2 class="total-price" ></h2>
-            <a href="checkout.html"class="checkout-btn">checkout</a>
+            <h2 class="total-price"></h2>
+            <a href="checkout.html" th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>
+            <br>
+            <a href="checkout.html"class="checkout-btn" style="text-decoration: none">Thanh toán qua pay</a>
         </div>
     </div>
 </div>
@@ -234,19 +236,12 @@
                 type: "PUT",
                 dataType: "json",
                 contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (response) {
-                   alert("Thanh cong")
-                },
-                error: function (err) {
-                    alert("that bai")
-                }
+                data: JSON.stringify(data)
             })
          }
 
     })
 
-    console.log(bill)
 </script>
 </body>
 </html>

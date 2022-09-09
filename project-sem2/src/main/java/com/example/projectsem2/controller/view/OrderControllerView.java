@@ -1,19 +1,20 @@
 package com.example.projectsem2.controller.view;
 
-import com.example.projectsem2.dto.OrderDemo;
 import com.example.projectsem2.model.*;
 import com.example.projectsem2.repository.*;
-import com.example.projectsem2.service.OrderService;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
 import com.example.projectsem2.service.implement.OrderDetailServiceImp;
 import com.example.projectsem2.service.implement.OrderServiceImpl;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
+import com.example.projectsem2.service.implement.ShoppingCardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class OrderControllerView {
@@ -36,26 +37,43 @@ public class OrderControllerView {
     ProductSizeRepository productSizeRepository;
     @Autowired
     ToppingRepository toppingRepository;
+    @Autowired
+    ShoppingCardServiceImpl shoppingCardService;
 
 
-    @GetMapping("/saveOrder")
-    public String addOrder(@RequestParam OrderDemo demo){
+    @GetMapping("/addOrder")
+    public String addOrder(@RequestParam List<Long> cardIds, @RequestParam Long userId){
+        System.out.println(cardIds);
+        List<ShoppingCard> shoppingCards = new ArrayList<>();
+        cardIds.forEach(id->{
+            ShoppingCard shoppingCard = shoppingCardService.findById(id);
+            shoppingCards.add(shoppingCard);
+        });
         Order order = new Order();
-        User user = userService.findById(demo.getUserId()).get();
+        User user = userService.findById(userId).get();
         order.setUserByUserId(user);
         order.setStatusByStatusId(statusRepository.findByName("pending"));
         orderService.saveOrder(order);
-        System.out.println(order);
-        OrderDetail orderDetail = new OrderDetail();
-        Product product = productService.findByName(demo.getProductName());
-        orderDetail.setOrderByOrderId(order);
-        orderDetail.setProductByProductId(product);
-        orderDetail.setQuantity(1);
-        orderDetail.setIceByIceId(iceRepository.findByPercent(demo.getIce()));
-        orderDetail.setSugarBySugarId(sugarRepository.findByPercent(demo.getSugar()));
-        orderDetail.setSizeBySizeId(productSizeRepository.findByName(demo.getSize()));
-        orderDetail.setToppingByToppingId(toppingRepository.findByTopping(demo.getTopping()));
-        orderDetailService.saveOrderDetail(orderDetail);
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        shoppingCards.forEach(shoppingCard -> {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setPrice(shoppingCard.getCardPrice());
+            orderDetail.setQuantity(shoppingCard.getProductQuantity());
+            Ice ice = iceRepository.findByPercent(shoppingCard.getIce());
+            orderDetail.setIceByIceId(ice);
+            Sugar sugar = sugarRepository.findByPercent(shoppingCard.getSugar());
+            orderDetail.setSugarBySugarId(sugar);
+            Product product = productService.findByName(shoppingCard.getProductName());
+            orderDetail.setProductByProductId(product);
+            ProductSize size = productSizeRepository.findByName(shoppingCard.getSize());
+            orderDetail.setSizeBySizeId(size);
+            Topping topping = toppingRepository.findByTopping(shoppingCard.getTopping());
+            orderDetail.setToppingByToppingId(topping);
+            orderDetail.setOrderByOrderId(order);
+            orderDetailService.saveOrderDetail(orderDetail);
+            orderDetails.add(orderDetail);
+        });
+        
         return "index";
     }
 

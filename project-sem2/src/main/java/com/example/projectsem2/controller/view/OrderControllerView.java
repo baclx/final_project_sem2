@@ -77,13 +77,10 @@ public class OrderControllerView {
             orderDetailService.saveOrderDetail(orderDetail);
             orderDetails.add(orderDetail);
         });
-<<<<<<< Updated upstream
         cardIds.forEach(id->{
             shoppingCardService.deleteShoppingCardById(id);
         });
-=======
-        
->>>>>>> Stashed changes
+
         return "redirect:/index";
     }
 

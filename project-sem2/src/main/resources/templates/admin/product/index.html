@@ -65,7 +65,7 @@
                 <td>[[${product.id}]]</td>
                 <th:block>
                     <td th:if="${product.image}">
-                        <img th:src="${product.image}" width="60px" height="60px">
+                        <img th:src="@{'/images/getimage/'+ ${product.image}}" width="50px" height="50px">
                     </td>
                     <td th:unless="${product.image}">
                         <p>no-img</p>
@@ -74,7 +74,7 @@
                 <td>[[${product.name}]]</td>
                 <td th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')} + đ"></td>
                 <th:block th:each="sale : ${product.sale}">
-                    <td>[[${sale.percent}]]%</td>
+                    <td>[[${sale.percent}]]</td>
                 </th:block>
                 <th:block th:each="category : ${product.categoryById}">
                     <td>[[${category.name}]]</td>

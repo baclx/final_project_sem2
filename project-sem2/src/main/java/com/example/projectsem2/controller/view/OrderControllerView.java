@@ -80,6 +80,7 @@ public class OrderControllerView {
         cardIds.forEach(id->{
             shoppingCardService.deleteShoppingCardById(id);
         });
+
         return "redirect:/index";
     }
 

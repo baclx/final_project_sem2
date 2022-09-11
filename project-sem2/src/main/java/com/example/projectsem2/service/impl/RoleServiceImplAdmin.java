@@ -1,9 +1,11 @@
 package com.example.projectsem2.service.impl;
 
 import com.example.projectsem2.model.Role;
+import com.example.projectsem2.model.User;
 import com.example.projectsem2.repository.RoleRepository;
 import com.example.projectsem2.service.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,4 +40,6 @@ public class RoleServiceImplAdmin implements CrudService<Role> {
     public void deleteById(Long id) {
         roleRepository.deleteById(id);
     }
+
+
 }

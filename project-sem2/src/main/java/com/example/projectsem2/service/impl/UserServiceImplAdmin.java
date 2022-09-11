@@ -5,6 +5,8 @@ import com.example.projectsem2.repository.UserRepository;
 import com.example.projectsem2.service.CrudService;
 import com.example.projectsem2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +58,14 @@ public class UserServiceImplAdmin implements CrudService<User>, UserService {
 
     public Optional<User> findByUsername(String username){
         return userRepository.findByUsername(username);
+    }
+
+
+    public ResponseEntity<User> getUserById(Long id) {
+        if(userRepository.findById(id).isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        User users = userRepository.findById(id).get();
+        return ResponseEntity.ok(users);
     }
 }

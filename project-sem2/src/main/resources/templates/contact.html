@@ -104,6 +104,14 @@
 
     <!-- JavaScript Libraries -->
     <div th:replace="fragments :: html_cript"></div>
+    <script>
+        const navLink = document.querySelectorAll.bind(document)('.nav-link')
+        navLink.forEach(nav=>{
+            nav.classList.remove('active')
+        })
+        const contact = document.querySelector.bind(document)('.contact')
+        contact.classList.add('active')
+    </script>
 </body>
 
 </html>

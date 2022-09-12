@@ -93,6 +93,14 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-web btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
     <div th:replace="fragments :: html_cript"></div>
+    <script>
+        const navLink = document.querySelectorAll.bind(document)('.nav-link')
+        navLink.forEach(nav=>{
+            nav.classList.remove('active')
+        })
+        const contact = document.querySelector.bind(document)('.service')
+        contact.classList.add('active')
+    </script>
 </body>
 
 </html>

@@ -11,32 +11,7 @@
 </head>
 <body>
 <!-- Navbar Start -->
-<div class="container-fluid p-0 nav-bar">
-    <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-        <a href="index.html" class="navbar-brand px-lg-4 m-0">
-            <img th:src="@{/../img/logo1.png}" src="img/logo1.png" height="100" width="100"/>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav ml-auto p-4">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link active">Product</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="menu.html" class="nav-item nav-link">Menu</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu text-capitalize">
-                        <a href="Login.html" class="dropdown-item">Login</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
+<div th:replace="fragments :: html_navbar"></div>
 <!-- Navbar End -->
 
 
@@ -119,68 +94,14 @@
 </div>
 
 <!-- Footer Start -->
-<div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-    <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
-            <p><i class="fa fa-map-marker-alt mr-2"></i>So 8A, Ton That Thuyet, Ha Noi</p>
-            <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-            <p class="m-0"><i class="fa fa-envelope mr-2"></i>drinkworld@example.com</p>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Follow Us</h4>
-            <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-            <div class="d-flex justify-content-start">
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Open Hours</h4>
-            <div>
-                <h6 class="text-white text-uppercase">Monday - Friday</h6>
-                <p>8.00 AM - 8.00 PM</p>
-                <h6 class="text-white text-uppercase">Saturday - Sunday</h6>
-                <p>2.00 PM - 8.00 PM</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Newsletter</h4>
-            <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-            <div class="w-100">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary font-weight-bold px-3">Sign Up</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="fragments :: html_footer"></div>
 <!-- Footer End -->
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
 <!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/../lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
-<script th:src="@{/../lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
-<script th:src="@{/../lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script th:src="@{/../lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
-<script th:src="@{/../lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script th:src="@{/../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}" src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-<!-- Contact Javascript File -->
-<script th:src="@{/../mail/jqBootstrapValidation.min.js}" src="mail/jqBootstrapValidation.min.js"></script>
-<script th:src="@{/../mail/contact.js}" src="mail/contact.js"></script>
-
-<!-- Template Javascript -->
-<script th:src="@{/../js/main.js}" src="js/main.js"></script>
+<div th:replace="fragments :: html_cript"></div>
 <script>
     var quantity =  document.querySelectorAll.bind(document)('.quantity')
     var productPrice = document.querySelectorAll.bind(document)('.productPrice')
@@ -198,6 +119,12 @@
     var topping = document.querySelectorAll.bind(document)('.topping')
     var cardId = document.querySelectorAll.bind(document)('.cardId')
 
+    const navLink = document.querySelectorAll.bind(document)('.nav-link')
+    navLink.forEach(nav=>{
+        nav.classList.remove('active')
+    })
+    const shoppingCart = document.querySelector.bind(document)('.shoppingCart')
+    shoppingCart.classList.add('active')
 
 
     console.log(productPrice)

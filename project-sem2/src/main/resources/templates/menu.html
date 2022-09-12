@@ -2,10 +2,16 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 
-<head></head><head th:replace="fragments :: html_head">
+<head th:replace="fragments :: html_head">
     <link rel="stylesheet" th:href="@{/../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.css}" href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.css">
 </head>
-
+<head>
+    <style>
+        .navbar-dark .navbar-nav .show>.nav-link, .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
+            color: deeppink !important;
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar Start -->
     <div th:replace="fragments :: html_navbar"></div>
@@ -185,6 +191,12 @@
         var pName = document.getElementById('productName')
         var currentUserId = document.getElementById('userId').value
         var pPrice = document.getElementById('productPrice')
+        const navLink = document.querySelectorAll.bind(document)('.nav-link')
+        navLink.forEach(nav=>{
+            nav.classList.remove('active')
+        })
+        const contact = document.querySelector.bind(document)('.menu')
+        contact.classList.add('active')
 
         function getOrderCard(id){
             var api = "/api/products/"+id;
@@ -232,6 +244,7 @@
             }
 
         }
+
     </script>
 </body>
 

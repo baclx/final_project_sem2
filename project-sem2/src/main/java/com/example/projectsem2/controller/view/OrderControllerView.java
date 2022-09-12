@@ -1,5 +1,7 @@
 package com.example.projectsem2.controller.view;
 
+import com.example.projectsem2.auth.GetInfo;
+import com.example.projectsem2.controller.mail.MailService;
 import com.example.projectsem2.model.*;
 import com.example.projectsem2.repository.*;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
@@ -18,6 +20,9 @@ import java.util.List;
 
 @Controller
 public class OrderControllerView {
+    // Mail
+    @Autowired
+    MailService mailService;
     @Autowired
     OrderServiceImpl orderService;
     @Autowired
@@ -45,7 +50,8 @@ public class OrderControllerView {
 
     @GetMapping("/addOrder")
     public String addOrder(@RequestParam List<Long> cardIds, @RequestParam Long userId){
-        System.out.println(cardIds);
+//        System.out.println(cardIds);
+        mailService.sendSimpleMail();
         List<ShoppingCard> shoppingCards = new ArrayList<>();
         cardIds.forEach(id->{
             ShoppingCard shoppingCard = shoppingCardService.findById(id);

@@ -68,13 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/**").permitAll();
         http.authorizeRequests().antMatchers("/img/**").permitAll();
         http.authorizeRequests().antMatchers("/static/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/fonts/**").permitAll();
-
-        http.authorizeRequests()
-                .antMatchers("/login", "/logout", "/register", "/process_register", "/process_login")
-                .permitAll();
 
         // bug - phai co tk - va nhieu hon 1 role thi moi dung dc
 //        http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
@@ -95,6 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/fonts/**").permitAll();
+//        http.authorizeRequests().antMatchers("/sendMail").permitAll();
         http.authorizeRequests()
                 .antMatchers("/login", "/logout", "/register", "/process_register", "/process_login")
                 .permitAll();

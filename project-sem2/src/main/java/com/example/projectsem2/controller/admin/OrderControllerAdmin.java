@@ -6,7 +6,6 @@ import com.example.projectsem2.model.Status;
 import com.example.projectsem2.service.impl.OrderDetailServiceImplAdmin;
 import com.example.projectsem2.service.impl.OrderServiceImplAdmin;
 import com.example.projectsem2.service.impl.StatusServiceImplAdmin;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("admin/order")

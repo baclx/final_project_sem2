@@ -97,7 +97,8 @@
                 <div class="total-price" >
                     <table>
                         <tr>
-                            <td th:text="'Total ('+ ${total}+' items)'"></td>
+                            <td th:text="'Total ('+ ${total}+' items)'" ></td>
+                            <input type="hidden" class="total_price">
                             <td class="section-heading"></td>
                         </tr>
                     </table>
@@ -110,7 +111,7 @@
         <div class="checkout-box" >
             <p class="text" th:text="'Total ('+ ${total}+' items)'"></p>
             <h2 class="total-price"></h2>
-            <a href="checkout.html" th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>
+            <a th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>
             <br>
             <a href="checkout.html"class="checkout-btn" style="text-decoration: none">Thanh toán qua pay</a>
         </div>
@@ -197,6 +198,8 @@
     var topping = document.querySelectorAll.bind(document)('.topping')
     var cardId = document.querySelectorAll.bind(document)('.cardId')
 
+
+
     console.log(productPrice)
     start();
 
@@ -214,11 +217,9 @@
     quantity.forEach((qty,i)=>{
         qty.onchange = function (){
             bill = 0
-
             price[i].textContent =  productPrice[i].value * qty.value + ' đ'
             document.querySelectorAll.bind(document)('.price')[i].textContent = price[i].textContent
             start()
-
             var data={
                 "userId" : userId,
                 "cardPrice":  productPrice[i].value * qty.value,

@@ -51,12 +51,12 @@ public class ShoppingCardControllerView {
     @GetMapping("/shoppingcard/user/{id}")
     public String getShoppingCard(@PathVariable("id") Long id, Model model){
         List<ShoppingCard> shoppingCards = shoppingCardService.getAllShoppingCard(id);
-        model.addAttribute("shoppingCards",shoppingCards);
         List<Long> shoppingCardIds = new ArrayList<>();
         shoppingCards.forEach(sc->{
             Long cardId = sc.getId();
             shoppingCardIds.add(cardId);
         });
+        model.addAttribute("shoppingCards",shoppingCards);
         model.addAttribute("cardIds",shoppingCardIds);
         Integer total = shoppingCards.size();
         if(shoppingCards.size()!=0){

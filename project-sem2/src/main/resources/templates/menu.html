@@ -1,61 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <title>Welcome to Drink World</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free Website Template" name="keywords">
-    <meta content="Free Website Template" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.min.css" rel="stylesheet">
-    <link rel="icon" href="img/logo1.png"  type= "img/x-icon">
+<head></head><head th:replace="fragments :: html_head">
+    <link rel="stylesheet" th:href="@{/../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.css}" href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.css">
 </head>
 
 <body>
     <!-- Navbar Start -->
-    <div class="container-fluid p-0 nav-bar">
-        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-            <a href="index.html" class="navbar-brand px-lg-4 m-0">
-                <img src="img/logo1.png" height="100" width="100"/>
-
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav ml-auto p-4">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="menu.html" class="nav-item nav-link active">Menu</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="Login.html" class="dropdown-item">Login</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <div th:replace="fragments :: html_navbar"></div>
     <!-- Navbar End -->
     <link herf="https://bbbootstrap.com/snippets/product-list-add-bag-and-orders-now-options-87761644">
 
@@ -78,386 +31,208 @@
     <div class="container-fluid pt-5">
         <div class="container">
             <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
-                <h1 class="display-4">Best Saller</h1>
+                <h4 class="text-web text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
+                <h1 class="display-4">Trà Sữa</h1>
            </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6" th:each="ts:${traSua}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b1.png" alt="">
-                            <h5 class="menu-price">$5</h5>
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ts.image}}" alt="">
+                            <h5 class="menu-price" th:text="${ts.price}"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
+                            <h4 th:text="${ts.name}">Black Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
+                            <button type="button" th:id="${ts.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+                            </button>
                         </div>
                     </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b2.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b3.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="col-lg-6">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b4.png" alt="">
-                            <h5 class="menu-price">$5</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b5.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b6.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                </div>
-            </div>
+
             </div>
 
             <div class="section-title">
-                <h1 class="display-4">Summer Drink</h1>
+                <h1 class="display-4">Fresh Fruit Tea</h1>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6" th:each="ft:${freshFruitTeas}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b6.png" alt="">
-                            <h5 class="menu-price">$5</h5>
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ft.image}}" alt="">
+                            <h5 class="menu-price" th:text="${ft.price}"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
+                            <h4 th:text="${ft.name}"></h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b7.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b8.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b9.png" alt="">
-                            <h5 class="menu-price">$5</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guber sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b10.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b11.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
+                            <button type="button" th:id="${ft.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="section-title">
-                    <h1 class="display-4">Drink New</h1>
+                    <h1 class="display-4">
+                        Macchiato Cream Cheese</h1>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6" th:each="cc:${creamCheese}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b12.png" alt="">
-                            <h5 class="menu-price">$5</h5>
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${cc.image}}" alt="">
+                            <h5 class="menu-price" th:text="${cc.price}"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
+                            <h4 th:text="${cc.name}">Black Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
+                            <button type="button" th:id="${cc.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+                            </button>
                         </div>
                     </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/b13.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Tra chocolate milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/Ca-phe-da-xay-popcorn.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee da xay</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="col-lg-6">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/trà-alisan-tắc-mật-og.Web_.png" alt="">
-                            <h5 class="menu-price">$5</h5>
 
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Tra Alisan tac mat ong</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guber sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/Sua-Tuoi-Long-Nhan.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Sua Tuoi olong Hanh Nhan</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/Strawberry-Chocolate-Milk-Tea.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="section-title">
-                <h1 class="display-4">Topping</h1>
+                <h1 class="display-4">Sữa Chua Dẻo</h1>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6" th:each="sc:${suaChuaDeo}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c1.png" alt="">
-                            <h5 class="menu-price">$5</h5>
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${sc.image}}" alt="">
+                            <h5 class="menu-price" th:text="${sc.price}"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4>Thạch đen</h4>
+                            <h4 th:text="${sc.name}">Black Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
+                            <button type="button" th:id="${sc.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch order" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+                            </button>
                         </div>
                     </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c2.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Trân châu đen</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c6.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Pudding xoài</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="col-lg-6">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c3.png" alt="">
-                            <h5 class="menu-price">$5</h5>
 
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Trân châu trắng</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guber sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c4.png" alt="">
-                            <h5 class="menu-price">$7</h5>
-
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Nha đam</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/c5.png" alt="">
-                            <h5 class="menu-price">$9</h5>
-
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Hạt chia</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button class="card-btn">Order now</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <!-- Menu End -->
 
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body ">
+                    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
 
-    <!-- Footer Start -->
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>So 8A, Ton That Thuyet, Ha Noi</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-                <p class="m-0"><i class="fa fa-envelope mr-2"></i>drinkworld@example.com</p>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Follow Us</h4>
-                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Open Hours</h4>
-                <div>
-                    <h6 class="text-white text-uppercase">Monday - Friday</h6>
-                    <p>8.00 AM - 8.00 PM</p>
-                    <h6 class="text-white text-uppercase">Saturday - Sunday</h6>
-                    <p>2.00 PM - 8.00 PM</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Newsletter</h4>
-                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary font-weight-bold px-3">Sign Up</button>
-                        </div>
+                    <div class="px-4 py-5">
+                        <form th:action="@{/addShoppingCard}" method="POST" id="order_form">
+                            <div class="image-slider">
+                                <img src="" id="order_image" style="width: 250px">
+                            </div>
+                            <div class="product_detail">
+                                <h5 id="product_name"></h5>
+                                <span id="product_price" style="text-decoration-line: line-through" ></span>
+                                <span id="product_new_price"></span>
+                            </div>
+                            <h5 class="product-sub-heading">Evaluated</h5>
+                            <h5 class="product-sub-heading" >Select size</h5>
+                            <div th:each="size:${sizes}">
+                                <input name="size" type="radio" th:value="*{size.name}" th:text="*{size.name}"><br>
+                            </div>
+                            <h5 class="product-sub-heading">Select sugar</h5>
+                            <div th:each="sugar:${sugars}">
+                                <p><input name="sugar" type="radio"  th:value="*{sugar.percent}" th:text="*{sugar.percent}"></p>
+                            </div>
+                            <h5 class="product-sub-heading">Select ice</h5>
+                            <div th:each="ice:${ices}">
+                                <p><input name="ice" type="radio" th:value="*{ice.percent}" th:text="*{ice.percent}"></p>
+                            </div>
+                            <h5 class="product-sub-heading">Topping</h5>
+                            <div th:each="topping:${toppings}">
+                                <p><input name="topping" type="radio" th:value="*{topping.topping}" th:text="*{topping.topping}"></p>
+                            </div>
+                            <input type="hidden" name="userId" th:value="${currentUserId}"  id="userId">
+                            <input type="hidden" name="productName" id="productName">
+                            <input type="hidden" name="productPrice" id="productPrice">
+                            <button class="btn btn-default btn-success" onclick="form_submit()" type="submit" name="submit" value="Submit">Order Now</button>
+                        </form>
+
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <!-- Footer End -->
-
+    <!-- Footer Start -->
+    <div th:replace="fragments :: html_footer"></div>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-lg btn-web btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
     <!-- JavaScript Libraries -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <div th:replace="fragments :: html_cript"></div>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script type="text/javascript">
+        var orderImage = document.getElementById('order_image')
+        var productName = document.getElementById('product_name')
+        var productNewPrice = document.getElementById('product_new_price')
+        var productPrice = document.getElementById('product_price')
+        var pName = document.getElementById('productName')
+        var currentUserId = document.getElementById('userId').value
+        var pPrice = document.getElementById('productPrice')
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+        function getOrderCard(id){
+            var api = "/api/products/"+id;
+            fetch(api)
+                .then((response) => response.json())
+                .then((data) => console.log(data),
+                    $.ajax({
+                        method: "GET",
+                        url: "/api/products/"+id,
+                        type:"json",
+                        success: function (reponse){
+                            orderImage.src ='/images/getimage/'+ reponse.image;
+                            productName.textContent = reponse.name
+                            pName.value = reponse.name
+                            productPrice.textContent = reponse.price
+                            pPrice.value = reponse.price
+                            switch (reponse.sale.percent){
+                                case "Sale 25%":
+                                    productNewPrice.textContent = reponse.price - reponse.price*25/100
+                                    break
+                                case "Sale 50%":
+                                    productNewPrice.textContent = reponse.price - reponse.price*50/100
+                                    break
+                                case "Sale 75%":
+                                    productNewPrice.textContent = reponse.price - reponse.price*75/100
+                                    break
+                                case "Không sale":
+                                    productNewPrice.textContent = reponse.price
+                                    break
+                            }
+
+
+                        },error: function (err){
+                            alert("false")
+                        }
+                    })
+                )
+
+        }
+        function form_submit() {
+            if(currentUserId == null){
+                alert("Ban phai dang nhap ")
+            }else{
+                document.getElementById("order_form").submit();
+            }
+
+        }
+    </script>
 </body>
 
 </html>

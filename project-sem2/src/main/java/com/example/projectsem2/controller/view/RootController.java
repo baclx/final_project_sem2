@@ -36,14 +36,14 @@ public class RootController {
         return currentUserId;
     }
 
-//    @GetMapping("/about")
-//    public String blogSingle(Model model) {
-//        Long id = getcurrentUserId();
-//        model.addAttribute("currentUserId",id);
-//        User currentUser = userService.getUserById(id).getBody();
-//        model.addAttribute("currentUser",currentUser);
-//        return "about";
-//    }
+    @GetMapping("/service")
+    public String blogSingle(Model model) {
+        Long id = getcurrentUserId();
+        model.addAttribute("currentUserId",id);
+        User currentUser = userService.getUserById(id).getBody();
+        model.addAttribute("currentUser",currentUser);
+        return "service";
+    }
 
     @GetMapping("/contact")
     public String contact(Model model) {

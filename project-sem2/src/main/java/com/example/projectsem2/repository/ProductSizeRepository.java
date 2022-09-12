@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductSizeRepository extends JpaRepository<ProductSize,Integer> {
     ProductSize findByName(String name);
+
 }

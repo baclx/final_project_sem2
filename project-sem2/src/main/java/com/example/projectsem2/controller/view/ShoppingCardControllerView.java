@@ -58,6 +58,10 @@ public class ShoppingCardControllerView {
         });
         model.addAttribute("shoppingCards",shoppingCards);
         model.addAttribute("cardIds",shoppingCardIds);
+        Long currentUserId = getcurrentUserId();
+        model.addAttribute("currentUserId",currentUserId);
+        User currentUser = userService.getUserById(currentUserId).getBody();
+        model.addAttribute("currentUser",currentUser);
         Integer total = shoppingCards.size();
         if(shoppingCards.size()!=0){
             model.addAttribute("total",total);

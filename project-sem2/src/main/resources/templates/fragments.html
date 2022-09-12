@@ -55,6 +55,9 @@
         .btn-web{
             background-color: #da9f5b;
         }
+        .navbar-dark .navbar-nav .show>.nav-link, .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
+            color: deeppink !important;
+        }
     </style>
 
 
@@ -65,7 +68,7 @@
         <div class="container-fluid p-0 nav-bar">
             <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
                 <a href="index.html" class="navbar-brand px-lg-4 m-0">
-                    <img th:src="@{../img/logo1.png}" height="100" width="100"/>
+                    <img   th:src="@{'/images/getimage/logo1.png'}" height="100" width="100"/>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -76,13 +79,13 @@
                             <a class="nav-link active home" th:href="@{/home}">Home</a>
                         </li>
                         <li class="nav-item menu">
-                            <a class="nav-link" href="about.html" th:href="@{/menu}">Menu</a>
+                            <a class="nav-link menu" href="about.html" th:href="@{/menu}">Menu</a>
                         </li>
                         <li class="nav-item " >
-                            <a class="nav-link propertyPage" id="property" th:href="@{/service}">Service</a>
+                            <a class="nav-link propertyPage service" id="property" th:href="@{/service}">Service</a>
                         </li>
                         <li class="nav-item blog">
-                            <a class="nav-link agents" th:href="@{/contact}">Contact</a>
+                            <a class="nav-link contact" th:href="@{/contact}">Contact</a>
                         </li>
                         <li th:switch="${currentUserId}">
                             <ul class="d-flex mr-4" th:case="'0'">
@@ -96,13 +99,12 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" th:href="@{'/userInfo'(userId=${currentUserId})}">Account</a></li>
-                                    <li><a class="dropdown-item" >Account</a></li>
                                     <li><a class="dropdown-item" th:href="@{/logout}">Sign out</a></li>
                                 </ul>
                             </ul>
                         </li>
                     </ul>
-                    <a  th:href="@{'/shoppingcard/user/' + ${currentUserId}}" class="nav-item nav-link"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: xx-large;color: blueviolet; margin-left: 25px"></i></a>
+                    <a  th:href="@{'/shoppingcard/user/' + ${currentUserId}}" class="nav-item nav-link shoppingCart"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: xx-large ;color: blueviolet; margin-left: 25px"></i></a>
                 </div>
             </nav>
         </div>

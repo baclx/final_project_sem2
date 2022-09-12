@@ -67,7 +67,7 @@ public class OrderControllerView {
         List<OrderDetail> orderDetails = new ArrayList<>();
         shoppingCards.forEach(shoppingCard -> {
             OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setPrice(shoppingCard.getCardPrice());
+            orderDetail.setPrice(shoppingCard.getProductQuantity()*shoppingCard.getProductPrice());
             orderDetail.setQuantity(shoppingCard.getProductQuantity());
             Ice ice = iceRepository.findByPercent(shoppingCard.getIce());
             orderDetail.setIceByIceId(ice);

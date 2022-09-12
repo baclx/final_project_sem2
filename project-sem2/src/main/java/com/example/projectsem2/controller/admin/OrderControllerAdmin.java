@@ -38,12 +38,14 @@ public class OrderControllerAdmin {
     ) {
         Long allOrder = orderService.countAllOrder();
         Long allOrderDone = orderService.countAllOrderStatusDone();
-        Long allOrderNotDone = orderService.countAllOrderStatusNotDone();
+        Long allOrderPending = orderService.countAllOrderStatusPending();
+        Long allOrderCancel = orderService.countAllOrderStatusCancelled();
 
         model.addAttribute("title", "Order");
         model.addAttribute("allOrder", allOrder);
         model.addAttribute("allOrderDone", allOrderDone);
-        model.addAttribute("allOrderNotDone", allOrderNotDone);
+        model.addAttribute("allOrderPending", allOrderPending);
+        model.addAttribute("allOrderCancel", allOrderCancel);
 
         return "admin/order/index";
     }

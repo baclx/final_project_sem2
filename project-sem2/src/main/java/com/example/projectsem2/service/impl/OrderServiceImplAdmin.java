@@ -59,8 +59,12 @@ public class OrderServiceImplAdmin implements CrudService<Order> {
         return orderRepository.countAllOrderStatusDone();
     }
 
-    public Long countAllOrderStatusNotDone() {
-        return orderRepository.countAllOrderStatusNotDone();
+    public Long countAllOrderStatusPending() {
+        return orderRepository.countAllOrderStatusPending();
+    }
+
+    public Long countAllOrderStatusCancelled() {
+        return orderRepository.countAllOrderStatusCancelled();
     }
 
     public Page<Order> pagination(int pageNumber) {

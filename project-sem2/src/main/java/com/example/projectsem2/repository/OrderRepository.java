@@ -23,6 +23,9 @@ public interface OrderRepository extends JpaRepository<Order,Long>, PagingAndSor
     @Query("select count(o.id) from Order o where o.statusByStatusId.name = 'Done'")
     Long countAllOrderStatusDone();
 
-    @Query("select count(o.id) from Order o where o.statusByStatusId.name in ('Cancelled', 'Pending')")
-    Long countAllOrderStatusNotDone();
+    @Query("select count(o.id) from Order o where o.statusByStatusId.name = 'Pending'")
+    Long countAllOrderStatusPending();
+
+    @Query("select count(o.id) from Order o where o.statusByStatusId.name = 'Cancelled'")
+    Long countAllOrderStatusCancelled();
 }

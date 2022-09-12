@@ -16,13 +16,13 @@
     <div class="col-xl-12 col-lg-3">
 
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="card widget-flat">
             <div class="card-body">
               <div class="float-right">
                 <i class="mdi mdi-star-face widget-icon bg-info-lighten text-info"></i>
               </div>
-              <h5 class="text-muted font-weight-normal mt-0">Orders</h5>
+              <h5 class="text-muted font-weight-normal mt-0">All Orders</h5>
                 <h3 class="mt-3 mb-3">[[${allOrder}]]</h3>
               <p class="mb-0 text-muted">
               </p>
@@ -30,21 +30,35 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="card widget-flat">
             <div class="card-body">
               <div class="float-right">
                 <i class="mdi mdi-language-java widget-icon bg-warning-lighten text-warning"></i>
               </div>
               <h5 class="text-muted font-weight-normal mt-0">Order Pending</h5>
-                <h3 class="mt-3 mb-3">[[${allOrderNotDone}]]</h3>
+                <h3 class="mt-3 mb-3">[[${allOrderPending}]]</h3>
               <p class="mb-0 text-muted">
               </p>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3">
+          <div class="card widget-flat">
+            <div class="card-body">
+              <div class="float-right">
+                <i class="mdi mdi-language-java widget-icon bg-danger-lighten text-danger"></i>
+              </div>
+              <h5 class="text-muted font-weight-normal mt-0">Order Cancelled</h5>
+              <h3 class="mt-3 mb-3">[[${allOrderCancel}]]</h3>
+              <p class="mb-0 text-muted">
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
           <div class="card widget-flat">
             <div class="card-body">
               <div class="float-right">

@@ -8,7 +8,7 @@
 <head>
     <style>
         .navbar-dark .navbar-nav .show>.nav-link, .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
-            color: deeppink !important;
+            color: #da9f5b !important;
         }
     </style>
 </head>
@@ -45,7 +45,7 @@
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ts.image}}" alt="">
-                            <h5 class="menu-price" th:text="${ts.price}"></h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(ts.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${ts.name}">Black Coffee</h4>
@@ -67,7 +67,7 @@
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ft.image}}" alt="">
-                            <h5 class="menu-price" th:text="${ft.price}"></h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(ft.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${ft.name}"></h4>
@@ -88,7 +88,7 @@
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${cc.image}}" alt="">
-                            <h5 class="menu-price" th:text="${cc.price}"></h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(cc.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${cc.name}">Black Coffee</h4>
@@ -109,7 +109,7 @@
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${sc.image}}" alt="">
-                            <h5 class="menu-price" th:text="${sc.price}"></h5>
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(sc.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
                             <h4 th:text="${sc.name}">Black Coffee</h4>

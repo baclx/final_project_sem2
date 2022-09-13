@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="fragments :: html_head">-->
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Drink World</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link  th:href="@{/../css/style.min.css}" rel="stylesheet">
+    <link rel="icon" th:href="@{/img/logo1.png}"  type= "img/x-icon">
+
+
+
+    <!-- Favicons -->
+    <link th:href="@{/../img/favicon.png}"  rel="icon">
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');body{background-color: #eeeeee;font-family: 'Open Sans',serif}.container{margin-top:50px;margin-bottom: 50px}.card{position: relative;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;min-width: 0;word-wrap: break-word;background-color: #fff;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.1);border-radius: 0.10rem}.card-header:first-child{border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0}.card-header{padding: 0.75rem 1.25rem;margin-bottom: 0;background-color: #fff;border-bottom: 1px solid rgba(0, 0, 0, 0.1)}.track{position: relative;background-color: #ddd;height: 7px;display: -webkit-box;display: -ms-flexbox;display: flex;margin-bottom: 60px;margin-top: 50px}.track .step{-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;width: 25%;margin-top: -18px;text-align: center;position: relative}.track .step.active:before{background: #FF5722}.track .step::before{height: 7px;position: absolute;content: "";width: 100%;left: 0;top: 18px}.track .step.active .icon{background: #ee5435;color: #fff}.track .icon{display: inline-block;width: 40px;height: 40px;line-height: 40px;position: relative;border-radius: 100%;background: #ddd}.track .step.active .text{font-weight: 400;color: #000}.track .text{display: block;margin-top: 7px}.itemside{position: relative;display: -webkit-box;display: -ms-flexbox;display: flex;width: 100%}.itemside .aside{position: relative;-ms-flex-negative: 0;flex-shrink: 0}.img-sm{width: 80px;height: 80px;padding: 7px}ul.row, ul.row-sm{list-style: none;padding: 0}.itemside .info{padding-left: 15px;padding-right: 7px}.itemside .title{display: block;margin-bottom: 5px;color: #212529}p{margin-top: 0;margin-bottom: 1rem}.btn-warning{color: #ffffff;background-color: #ee5435;border-color: #ee5435;border-radius: 1px}.btn-warning:hover{color: #ffffff;background-color: #ff2b00;border-color: #ff2b00;border-radius: 1px}
+        .hiden{
+            display: none;
+        }
+        .card-header a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="fragments :: html_navbar"></div>
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase"></h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href=""></a></p>
+            <p class="m-0 text-white px-2"></p>
+            <p class="m-0 text-white"></p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <article class="card">
+        <header class="card-header"> <a th:href="@{'/shoppingcard/user/' + ${currentUserId}}">My Orders </a>  <a th:href="@{'/orderTracking/user/'+${currentUserId}}">/ Tracking</a> <a th:href="@{'/historyOrder/user/'+${currentUserId}}">/ History</a></header>
+        <div>
+            <div class="card-body "th:each="order:${orders}">
+                <input type="hidden" th:value="${order.statusByStatusId.id}" class="statusId">
+                <h6 th:text="'Order ID: '+ ${order.id}"></h6>
+                <h6 th:text="${order.createdAt}"></h6>
+                <hr>
+                <ul class="row" th:each="od: ${order.getOrderDetailsById()}">
+                    <li class="col-md-4">
+                        <figure class="itemside mb-3">
+                            <div class="aside"><img src="https://i.imgur.com/iDwDQ4o.png" th:src="@{'/images/getimage/'+ ${od.productByProductId.image}}" class="img-sm border"></div>
+                            <figcaption class="info align-self-center">
+                                <p class="title" th:text="${od.productByProductId.name}"><br></p> <span class="text-muted" th:text="${#numbers.formatDecimal(od.productByProductId.price, 0, 'POINT', 0, 'POINT')} + ' đ'"> </span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <hr>
+        </div>
+
+    </article>
+</div>
+<div th:fragment="html_footer">
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>So 8A, Ton That Thuyet, Ha Noi</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>drinkworld@example.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Follow Us</h4>
+                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class=" fa fa-facebook"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fa fa-linkedin"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Open Hours</h4>
+                <div>
+                    <h6 class="text-white text-uppercase">Monday - Friday</h6>
+                    <p>8.00 AM - 8.00 PM</p>
+                    <h6 class="text-white text-uppercase">Saturday - Sunday</h6>
+                    <p>2.00 PM - 8.00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Newsletter</h4>
+                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
+                        <div class="input-group-append">
+                            <button class="btn btn-web font-weight-bold px-3">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:fragment="html_cript">
+    <script th:src="@{/../lib/jquery/jquery.min.js}" src="/static/FES/lib/jquery/jquery.min.js"></script>
+    <script th:src="@{/../lib/jquery/jquery-migrate.min.js}" src="/static/FES/lib/jquery/jquery-migrate.min.js"></script>
+    <script th:src="@{/../lib/easing/easing.min.js}" src="lib/easing/easing.min.js"></script>
+    <script th:src="@{/../lib/waypoints/waypoints.min.js}" src="lib/waypoints/waypoints.min.js"></script>
+    <script th:src="@{/../lib/owlcarousel/owl.carousel.min.js}" src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script th:src="@{/../lib/tempusdominus/js/moment.min.js}" src="lib/tempusdominus/js/moment.min.js"></script>
+    <script th:src="@{/../lib/tempusdominus/js/moment-timezone.min.js}" src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/../js/main.js}" src="js/main.js"></script>
+</div>
+
+</body>
+</html>

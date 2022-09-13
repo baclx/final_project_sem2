@@ -41,7 +41,7 @@
         <div class="small-container cart-page cart">
             <p class="section-heading">Order /<a th:href="@{'/orderTracking/user/'+${currentUserId}}"> Tracking</a></p>
             <hr>
-            <form>
+
                 <table>
                     <thead>
                     <th>Product</th>
@@ -50,7 +50,6 @@
                     </thead>
                     <tbody>
                     <input type="hidden" th:value="${userId}" id="userId">
-
                     <tr th:each="sc:${shoppingCards}" >
                         <td>
                             <div class="cart-info">
@@ -86,17 +85,30 @@
                         </tr>
                     </table>
                 </div>
-            </form>
+
+        </div>
+        <div class="small-container cart-page cart">
+            <p class="section-heading">Nhập địa chỉ</p>
+            <input type="text" id="address">
+            <button class="btn-info " id="btn-address" >Xác nhận địa chỉ</button>
         </div>
     </div>
 
     <div class="checkout-section">
+        <form th:action="@{/addOrder(cardIds=${cardIds})}" method="post">
+            <input type="hidden" name="address" id="productAddress">
+            <input type="hidden" name="userId" th:value="${currentUserId}">
         <div class="checkout-box" >
             <p class="text" th:text="'Total ('+ ${total}+' items)'"></p>
             <h2 class="total-price"></h2>
-            <a th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>
+<!--            <a th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>-->
+            <button type="submit" class="checkout-btn" >Thanh toán trực tiếp</button>
         </div>
+        </form>
     </div>
+
+
+
 </div>
 
 <!-- Footer Start -->
@@ -124,7 +136,12 @@
     var ice =document.querySelectorAll.bind(document)('.ice')
     var topping = document.querySelectorAll.bind(document)('.topping')
     var cardId = document.querySelectorAll.bind(document)('.cardId')
-
+    cardId.forEach(cId=>{
+        console.log(cId)
+    })
+    var addressBtn = document.getElementById('btn-address')
+    var address = document.getElementById('address')
+    var productAddress = document.getElementById('productAddress')
     const navLink = document.querySelectorAll.bind(document)('.nav-link')
     navLink.forEach(nav=>{
         nav.classList.remove('active')
@@ -132,8 +149,9 @@
     const shoppingCart = document.querySelector.bind(document)('.shoppingCart')
     shoppingCart.classList.add('active')
 
+    var cardId = document.getElementById('cardId')
+    console.log(typeof(cardId))
 
-    console.log(productPrice)
     start();
 
     function start(){
@@ -175,6 +193,12 @@
          }
 
     })
+
+    addressBtn.onclick = function (){
+        productAddress.value = address.value
+        alert(productAddress.value)
+        console.log(productAddress.value)
+    }
 
 </script>
 </body>

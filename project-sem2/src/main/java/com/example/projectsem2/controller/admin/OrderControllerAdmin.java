@@ -56,10 +56,10 @@ public class OrderControllerAdmin {
             Model model
     ) {
         List<OrderDetail> orderDetailLists = orderDetailService.findOrderDetailByOrderId(id);
+            model.addAttribute("orders", orderDetailLists);
+            model.addAttribute("title", "Order Details");
+            return "admin/order/show";
 
-        model.addAttribute("orders", orderDetailLists);
-        model.addAttribute("title", "Order Details");
-        return "admin/order/show";
     }
 
     @GetMapping("/page/1/")

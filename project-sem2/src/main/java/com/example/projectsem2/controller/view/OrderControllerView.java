@@ -1,7 +1,7 @@
 package com.example.projectsem2.controller.view;
 
-import com.example.projectsem2.auth.GetInfo;
 import com.example.projectsem2.controller.mail.MailService;
+import com.example.projectsem2.dto.OrderInput;
 import com.example.projectsem2.model.*;
 import com.example.projectsem2.repository.*;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
@@ -14,11 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,10 +68,10 @@ public class OrderControllerView {
         Long currentUserId = u.getId();
         return currentUserId;
     }
-    @GetMapping("/addOrder")
-    public String addOrder(@RequestParam List<Long> cardIds, @RequestParam Long userId){
-//        System.out.println(cardIds);
-        mailService.sendSimpleMail();
+    @PostMapping("/addOrder")
+    public String addOrder(@ModelAttribute OrderInput orderInput, @RequestParam List<Long> cardIds){
+        String address = orderInput.getAddress();
+        Long userId = orderInput.getUserId();
         List<ShoppingCard> shoppingCards = new ArrayList<>();
         cardIds.forEach(id->{
             ShoppingCard shoppingCard = shoppingCardService.findById(id);
@@ -84,9 +81,13 @@ public class OrderControllerView {
                 shoppingCards.add(shoppingCard);
             }
         });
+        if(shoppingCards.size()==0){
+            return "redirect:/orderTracking/user/"+getcurrentUserId();
+        }
         Order order = new Order();
         User user = userService.findById(userId).get();
         Payment payment = paymentRepository.findByType("Thanh toán trực tiếp");
+        order.setAddress(address);
         order.setPaymentByPaymentId(payment);
         order.setUserByUserId(user);
         order.setStatusByStatusId(statusRepository.findByName("Pending"));
@@ -113,8 +114,9 @@ public class OrderControllerView {
         cardIds.forEach(id->{
             shoppingCardService.deleteShoppingCardById(id);
         });
+        mailService.sendSimpleMail();
+        return "redirect:/orderTracking/user/"+getcurrentUserId();
 
-        return "redirect:/index";
     }
 
     @GetMapping("/orderTracking/user/{id}")

@@ -54,7 +54,7 @@ public class ShoppingCardServiceImpl implements ShoppingCardService {
                         return shoppingCardRepository.save(shoppingCard);
                 }
             }
-        }else {
+        }else if(shoppingCards.size() == 0) {
             return shoppingCardRepository.save(shoppingCard);
         }
         return shoppingCardRepository.save(shoppingCard);

@@ -52,6 +52,11 @@ public class Order {
 //    @JsonIgnore
     private Status statusByStatusId;
 
+
+
+    @Column(name = "address")
+    private String address;
+
 //    @JsonIdentityInfo(
 //            generator = ObjectIdGenerators.PropertyGenerator.class,
 //            property = "id")

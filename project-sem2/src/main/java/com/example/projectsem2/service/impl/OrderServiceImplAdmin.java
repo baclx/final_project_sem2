@@ -71,4 +71,9 @@ public class OrderServiceImplAdmin implements CrudService<Order> {
         Pageable pageable = PageRequest.of(pageNumber - 1, 4, Sort.by(Sort.Direction.DESC, "id"));
         return orderRepository.findAll(pageable);
     }
+
+    public Page<Order> listPage(int pageNum, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return orderRepository.findAll(pageable);
+    }
 }

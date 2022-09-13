@@ -1,5 +1,7 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,22 +53,28 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Order orderByOrderId;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Product productByProductId;
 
     @ManyToOne
     @JoinColumn(name = "size_id", referencedColumnName = "id")
+    @JsonIgnore
     private ProductSize sizeBySizeId;
     @ManyToOne
     @JoinColumn(name = "sugar_id", referencedColumnName = "id")
+    @JsonIgnore
     private Sugar sugarBySugarId;
     @ManyToOne
     @JoinColumn(name="ice_id",referencedColumnName = "id" )
+    @JsonIgnore
     private Ice iceByIceId;
     @ManyToOne
     @JoinColumn(name="topping_id",referencedColumnName = "id" )
+    @JsonIgnore
     private Topping toppingByToppingId;
 }

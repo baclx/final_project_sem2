@@ -1,5 +1,6 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,7 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "userByUserId")
+    @JsonBackReference
     private Collection<Order> ordersById;
 
     @OneToMany(mappedBy = "userByUserId")

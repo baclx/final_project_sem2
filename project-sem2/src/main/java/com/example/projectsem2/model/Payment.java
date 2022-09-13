@@ -1,5 +1,7 @@
 package com.example.projectsem2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,5 +20,6 @@ public class Payment {
     private String type;
 
     @OneToMany(mappedBy = "paymentByPaymentId")
+    @JsonBackReference
     private Collection<Order> ordersById;
 }

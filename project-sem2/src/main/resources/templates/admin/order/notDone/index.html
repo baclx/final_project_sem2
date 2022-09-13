@@ -37,6 +37,7 @@
                 <th>Payment</th>
                 <th>Status</th>
                 <th>Completed</th>
+                <th>Shipping</th>
                 <th>Cancelled</th>
                 <th>Detail</th>
             </tr>
@@ -52,6 +53,16 @@
                 </th:block>
                 <th:block th:each="status : ${order.statusByStatusId}">
                     <div th:switch="${status.name}">
+                        <td th:case="Shipping">
+                            <span class="badge badge-info-lighten mt-2">
+                                [[${status.name}]]
+                            </span>
+                        </td>
+                        <td th:case="Received">
+                            <span class="badge badge-success-lighten mt-2">
+                                [[${status.name}]]
+                            </span>
+                        </td>
                         <td th:case="Pending">
                             <span class="badge badge-warning-lighten mt-2">
                                 [[${status.name}]]
@@ -75,11 +86,16 @@
                         </a>
                     </td>
                     <td>
+                        <a class="btn btn-info" th:href="@{'/admin/order/shipStatus/' + ${order.id}}">
+                            Ship
+                        </a>
+                    </td>
+                    <td>
                         <a class="btn btn-danger" th:href="@{'/admin/order/cancelStatus/' + ${order.id}}">
                             <i class="uil-multiply"></i>
                         </a>
                     </td>
-                <td>
+                    <td>
                     <a class="btn btn-info" th:href="@{'/admin/order/show/' + ${order.id}}">
                         show
                     </a>

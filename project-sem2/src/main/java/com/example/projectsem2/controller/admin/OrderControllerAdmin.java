@@ -122,6 +122,19 @@ public class OrderControllerAdmin {
         return upgradeStatus(request, ra, optionalOrder, optionalStatus);
     }
 
+    @GetMapping("/shipStatus/{id}")
+    public String shipStatus(
+            @PathVariable("id") Long id,
+            HttpServletRequest request,
+            RedirectAttributes ra
+    ) {
+        Optional<Order> optionalOrder = orderService.findById(id);
+
+        Optional<Status> optionalStatus = statusService.findByName("Shipping");
+
+        return upgradeStatus(request, ra, optionalOrder, optionalStatus);
+    }
+
     @GetMapping("/cancelStatus/{id}")
     public String cancelStatus(
             @PathVariable("id") Long id,

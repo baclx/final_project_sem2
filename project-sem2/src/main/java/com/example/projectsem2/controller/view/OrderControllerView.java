@@ -10,13 +10,18 @@ import com.example.projectsem2.service.implement.OrderServiceImpl;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
 import com.example.projectsem2.service.implement.ShoppingCardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class OrderControllerView {
@@ -47,7 +52,25 @@ public class OrderControllerView {
     @Autowired
     PaymentRepository paymentRepository;
 
+    public Long getcurrentUserId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
 
+        } else {
+            username = principal.toString();
+        }
+        Optional<User> opUsert = userService.findByUsername(username);
+        User u;
+        if(opUsert.isPresent()) {
+            u = opUsert.get();
+        } else {
+            u = new User();
+        }
+        Long currentUserId = u.getId();
+        return currentUserId;
+    }
     @GetMapping("/addOrder")
     public String addOrder(@RequestParam List<Long> cardIds, @RequestParam Long userId){
 //        System.out.println(cardIds);
@@ -55,7 +78,11 @@ public class OrderControllerView {
         List<ShoppingCard> shoppingCards = new ArrayList<>();
         cardIds.forEach(id->{
             ShoppingCard shoppingCard = shoppingCardService.findById(id);
-            shoppingCards.add(shoppingCard);
+            if(shoppingCard.getProductQuantity()==0){
+                shoppingCardService.deleteShoppingCardById(id);
+            }else{
+                shoppingCards.add(shoppingCard);
+            }
         });
         Order order = new Order();
         User user = userService.findById(userId).get();
@@ -88,6 +115,37 @@ public class OrderControllerView {
         });
 
         return "redirect:/index";
+    }
+
+    @GetMapping("/orderTracking/user/{id}")
+    public String getOrderTracking(@PathVariable("id") Long id, Model model) {
+        Long currentUserId = getcurrentUserId();
+        model.addAttribute("currentUserId", currentUserId);
+        User currentUser = userService.getUserById(currentUserId).getBody();
+        model.addAttribute("currentUser", currentUser);
+        List<Order> orders = orderService.getAllByUser(currentUserId);
+        model.addAttribute("orders",orders);
+        return "orderTracking";
+    }
+
+    @GetMapping("/updateOrder")
+    public String updateOrder(@RequestParam Long orderId, @RequestParam Long userId){
+        Order order = orderService.getOrderById(orderId).getBody();
+        Status status = statusRepository.findByName("Received");
+        order.setStatusByStatusId(status);
+        orderService.saveOrder(order);
+        return "redirect:/orderTracking/user/"+userId;
+    }
+
+    @GetMapping("/historyOrder/user/{id}")
+    public String history(@PathVariable("id") Long id, Model model){
+        Long currentUserId = getcurrentUserId();
+        model.addAttribute("currentUserId", currentUserId);
+        User currentUser = userService.getUserById(currentUserId).getBody();
+        model.addAttribute("currentUser", currentUser);
+        List<Order> orders = orderService.getHistoryOrder(currentUserId);
+        model.addAttribute("orders",orders);
+        return "history";
     }
 
 }

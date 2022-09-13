@@ -33,6 +33,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order updateOrder(Order order, Long id) {
+            order.setId(id);
+            orderRepository.save(order);
+            return order;
+
+    }
+
+    @Override
     public ResponseEntity<Order> deleteOrderById(Long id) {
         return null;
     }
@@ -41,4 +49,12 @@ public class OrderServiceImpl implements OrderService {
     public Order saveOrder(Order order) {
         return orderRepository.save(order);
     }
+
+    @Override
+    public List<Order> getAllByUser(Long userId){
+        return orderRepository.getAllByUserByUserId(userId);
+    }
+
+    @Override
+    public List<Order> getHistoryOrder(Long userId){return orderRepository.getOrdersDone(userId);}
 }

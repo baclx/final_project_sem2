@@ -8,6 +8,14 @@
     <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
     <link rel="stylesheet" th:href="@{/../css/start.css}" href="css/start.css">
     <link rel="stylesheet" th:href="@{/../css/cart.css}" href="css/cart.css">
+    <style>
+        .section-heading a{
+            text-decoration: none;
+        }
+        .section-heading a:hover{
+            color: #da9f5b;
+        }
+    </style>
 </head>
 <body>
 <!-- Navbar Start -->
@@ -31,7 +39,7 @@
 <div class="cart-section">
     <div class="product-list">
         <div class="small-container cart-page cart">
-            <p class="section-heading">Order</p>
+            <p class="section-heading">Order /<a th:href="@{'/orderTracking/user/'+${currentUserId}}"> Tracking</a></p>
             <hr>
             <form>
                 <table>
@@ -46,7 +54,7 @@
                     <tr th:each="sc:${shoppingCards}" >
                         <td>
                             <div class="cart-info">
-                                <a href="product1.html"><img  th:src="@{'/images/getimage/'+ ${sc.productImage}}" width="100px" height="100px"></a>
+                                <a ><img  th:src="@{'/images/getimage/'+ ${sc.productImage}}" width="100px" height="100px"></a>
                                 <input type="hidden" th:value="${sc.productImage}" class="image">
                                 <div>
                                     <small th:text="${sc.productName}" class="name"></small>
@@ -56,7 +64,7 @@
                                      <small th:text="${sc.topping}" class="topping"></small>
                                     <br>
                                     <small> In Stock</small>
-                                    <a href="">delete</a>
+                                    <a th:href="@{'/deleteShoppingCard/id/'+${sc.id}}">delete</a>
                                 </div>
                             </div>
                         </td>
@@ -87,8 +95,6 @@
             <p class="text" th:text="'Total ('+ ${total}+' items)'"></p>
             <h2 class="total-price"></h2>
             <a th:href="@{/addOrder(cardIds=${cardIds},userId=${userId})}" class="checkout-btn" style="text-decoration: none">Thanh toán trực tiếp</a>
-            <br>
-            <a href="checkout.html"class="checkout-btn" style="text-decoration: none">Thanh toán qua pay</a>
         </div>
     </div>
 </div>
@@ -97,7 +103,7 @@
 <div th:replace="fragments :: html_footer"></div>
 <!-- Footer End -->
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<a href="#" class="btn btn-lg btn-web btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
 <!-- JavaScript Libraries -->

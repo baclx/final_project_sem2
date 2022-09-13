@@ -53,6 +53,7 @@ public class OrderControllerAdmin {
             HttpServletRequest request,
             RedirectAttributes ra
     ) {
+<<<<<<< Updated upstream
         Optional<OrderDetail> optionalOrderDetail = orderDetailService.findOrderDetailByOrderId(id);
 
         if (optionalOrderDetail.isPresent()) {
@@ -64,6 +65,12 @@ public class OrderControllerAdmin {
         ra.addFlashAttribute("err", "Not Found");
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
+=======
+        List<OrderDetail> orderDetailLists = orderDetailService.findOrderDetailByOrderId(id);
+        model.addAttribute("orders", orderDetailLists);
+        model.addAttribute("title", "Order Details");
+        return "admin/order/show";
+>>>>>>> Stashed changes
     }
 
     @GetMapping("/orderNotDone/page/1/")

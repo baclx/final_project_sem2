@@ -48,6 +48,18 @@ public class Order {
     @JoinColumn(name = "status_id")
     private Status statusByStatusId;
 
+<<<<<<< Updated upstream
     @OneToMany(mappedBy = "orderByOrderId")
+=======
+    @Column(name = "address")
+    private String address;
+
+//    @JsonIdentityInfo(
+//            generator = ObjectIdGenerators.PropertyGenerator.class,
+//            property = "id")
+    @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.LAZY)
+//    @JsonIgnore
+    @JsonManagedReference
+>>>>>>> Stashed changes
     private Collection<OrderDetail> orderDetailsById;
 }

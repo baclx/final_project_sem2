@@ -32,9 +32,11 @@
             <th>Sale</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Address</th>
         </tr>
         <th:block th:object="${order}">
             <tr>
+<<<<<<< Updated upstream
                 <td>[[*{id}]]</td>
                 <td>[[*{orderByOrderId.id}]]</td>
                 <td>[[*{productByProductId.name}]]</td>
@@ -46,6 +48,31 @@
                 <td>[[*{sale}]]%</td>
                 <td>[[*{quantity}]]</td>
                 <td th:text="*{#numbers.formatDecimal(price, 0, 'POINT', 0, 'POINT')} + đ"></td>
+=======
+                <td>[[${order.id}]]</td>
+                <th:block th:each="k : ${order.orderByOrderId}">
+                    <td>[[${k.id}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.productByProductId}">
+                    <td>[[${k.name}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.iceByIceId}">
+                    <td>[[${k.percent}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.sugarBySugarId}">
+                    <td>[[${k.percent}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.sizeBySizeId}">
+                    <td>[[${k.name}]]</td>
+                </th:block>
+                <th:block th:each="k : ${order.toppingByToppingId}">
+                    <td>[[${k.topping}]]</td>
+                </th:block>
+                <td>[[${order.sale}]]%</td>
+                <td>[[${order.quantity}]]</td>
+                <td th:text="*{#numbers.formatDecimal(order.price, 0, 'POINT', 0, 'POINT')} + 'đ'"></td>
+                <td th:text="${order.orderByOrderId.address}"></td>
+>>>>>>> Stashed changes
             </tr>
         </th:block>
     </table>

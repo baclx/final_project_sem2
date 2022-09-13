@@ -40,7 +40,7 @@ public interface OrderRepository extends JpaRepository<Order,Long>, PagingAndSor
     List<Order> getAllByUserByUserId(Long userId);
 
     @Query("select o from Order o inner join User u on u.id = o.userByUserId.id " +
-            "inner join Status s on s.id = o.statusByStatusId.id where s.id = 7 and u.id = ?1")
+            "inner join Status s on s.id = o.statusByStatusId.id where s.id = 7 and u.id = ?1 order by o.createdAt desc")
     List<Order> getOrdersDone(Long userId);
 >>>>>>> Stashed changes
 }

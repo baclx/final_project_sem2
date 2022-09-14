@@ -145,11 +145,11 @@ public class OrderControllerAdmin {
 
         Optional<Status> optionalStatus = statusService.findByName("Cancelled");
 
-        if (optionalOrder.isPresent() && !optionalOrder.get().getStatusByStatusId().getName().equals("Done")) {
+        if (optionalOrder.isPresent() && !optionalOrder.get().getStatusByStatusId().getName().equals("Shipping")) {
             return upgradeStatus(request, ra, optionalOrder, optionalStatus);
         }
 
-        ra.addFlashAttribute("err", "Not Update Status Done");
+        ra.addFlashAttribute("err", "Not Update Status Shipping");
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }

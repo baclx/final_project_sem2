@@ -45,8 +45,7 @@ public class User {
     @JsonBackReference
     private Collection<Order> ordersById;
 
-    @OneToMany(mappedBy = "userByUserId")
-    private Collection<Review> reviewsById;
+
 
 //    @OneToMany(mappedBy = "userByUserId")
 //    private Collection<UserRole> userRolesById;

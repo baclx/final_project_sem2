@@ -53,9 +53,6 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category categoryById;
 
-    @OneToMany(mappedBy = "productByProductId")
-    @JsonIgnore
-    private Collection<Review> reviewsById;
 
     public double getPriceAfterSale(double price, Sale sale){
         int sale_id = sale.getId();

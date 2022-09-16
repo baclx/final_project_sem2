@@ -1,10 +1,7 @@
 package com.example.projectsem2.controller.view;
 
 import com.example.projectsem2.model.*;
-import com.example.projectsem2.repository.IceRepository;
-import com.example.projectsem2.repository.ProductSizeRepository;
-import com.example.projectsem2.repository.SugarRepository;
-import com.example.projectsem2.repository.ToppingRepository;
+import com.example.projectsem2.repository.*;
 import com.example.projectsem2.service.impl.UserServiceImplAdmin;
 import com.example.projectsem2.service.implement.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +28,9 @@ public class ProductControllerView {
     ProductSizeRepository productSizeRepository;
     @Autowired
     ToppingRepository toppingRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     public Long getcurrentUserId(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,32 +52,25 @@ public class ProductControllerView {
         return currentUserId;
     }
 
-    
-   @GetMapping("/menu")
-    public String getMenu(Model model){
-        List<Product> trasuaList = productService.getAllByCategory("Trà sữa");
-        model.addAttribute("traSua",trasuaList);
-        List<Product> freshFruitTeas = productService.getAllByCategory("Fresh Fruit Tea");
-        model.addAttribute("freshFruitTeas",freshFruitTeas);
-        List<Product> macchiatoCreamCheese = productService.getAllByCategory("Macchiato Cream Cheese");
-        model.addAttribute("creamCheese",macchiatoCreamCheese);
-        List<Product> suaChuaDeos = productService.getAllByCategory("Sữa Chua Dẻo");
-        model.addAttribute("suaChuaDeo",suaChuaDeos);
-       Long id = getcurrentUserId();
-       model.addAttribute("currentUserId",id);
-       User currentUser = userService.getUserById(id).getBody();
-       model.addAttribute("currentUser",currentUser);
-       List<Topping> toppings = toppingRepository.findAll();
-       List<Ice> ices = iceRepository.findAll();
-       List<Sugar> sugars = sugarRepository.findAll();
-       List<ProductSize> sizes = productSizeRepository.findAll();
-       model.addAttribute("toppings",toppings);
-       model.addAttribute("ices",ices);
-       model.addAttribute("sugars",sugars);
-       model.addAttribute("sizes",sizes);
-       return "menu";
-   }
 
 
+    @GetMapping("/menu")
+    public String getMenus(Model model){
+        Long id = getcurrentUserId();
+        model.addAttribute("currentUserId",id);
+        User currentUser = userService.getUserById(id).getBody();
+        model.addAttribute("currentUser",currentUser);
+       List<Category> categories = categoryRepository.findAll();
+       model.addAttribute("categories",categories);
+        List<Topping> toppings = toppingRepository.findAll();
+        List<Ice> ices = iceRepository.findAll();
+        List<Sugar> sugars = sugarRepository.findAll();
+        List<ProductSize> sizes = productSizeRepository.findAll();
+        model.addAttribute("toppings",toppings);
+        model.addAttribute("ices",ices);
+        model.addAttribute("sugars",sugars);
+        model.addAttribute("sizes",sizes);
+        return "menu";
+    }
 
 }

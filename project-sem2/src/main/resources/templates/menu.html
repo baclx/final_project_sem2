@@ -13,108 +13,45 @@
     </style>
 </head>
 <body>
-    <!-- Navbar Start -->
-    <div th:replace="fragments :: html_navbar"></div>
-    <!-- Navbar End -->
-    <link herf="https://bbbootstrap.com/snippets/product-list-add-bag-and-orders-now-options-87761644">
+<!-- Navbar Start -->
+<div th:replace="fragments :: html_navbar"></div>
+<!-- Navbar End -->
+<link herf="https://bbbootstrap.com/snippets/product-list-add-bag-and-orders-now-options-87761644">
 
 
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menu</h1>
-            <div class="d-inline-flex mb-lg-5">
-                <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
-                <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Menu</p>
-            </div>
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menu</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Menu</p>
         </div>
     </div>
-    <!-- Page Header End -->
+</div>
+<!-- Page Header End -->
 
 
-    <!-- Menu Start -->
-    <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-web text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
-                <h1 class="display-4">Trà Sữa</h1>
-           </div>
-            <div class="row">
-                <div class="col-sm-6" th:each="ts:${traSua}">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ts.image}}" alt="">
-                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(ts.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4 th:text="${ts.name}">Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button type="button" th:id="${ts.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="section-title">
-                <h1 class="display-4">Fresh Fruit Tea</h1>
+<!-- Menu Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <h4 class="text-web text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
+        <div th:each="category:${categories}">
+            <div class="section-title" >
+                <h1 class="display-4" th:text="${category.name}">Trà Sữa</h1>
             </div>
             <div class="row">
-                <div class="col-sm-6" th:each="ft:${freshFruitTeas}">
+                <div class="col-sm-6" th:each="product:${category.getProductsById()}">
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${ft.image}}" alt="">
-                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(ft.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${product.image}}" alt="">
+                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
                         </div>
                         <div class="col-8 col-sm-9">
-                            <h4 th:text="${ft.name}"></h4>
+                            <h4 th:text="${product.name}">Black Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button type="button" th:id="${ft.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">
-                    <h1 class="display-4">
-                        Macchiato Cream Cheese</h1>
-            </div>
-            <div class="row">
-                <div class="col-sm-6" th:each="cc:${creamCheese}">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${cc.image}}" alt="">
-                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(cc.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4 th:text="${cc.name}">Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button type="button" th:id="${cc.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="section-title">
-                <h1 class="display-4">Sữa Chua Dẻo</h1>
-            </div>
-            <div class="row">
-                <div class="col-sm-6" th:each="sc:${suaChuaDeo}">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" th:src="@{'/images/getimage/'+ ${sc.image}}" alt="">
-                            <h5 class="menu-price" th:text="${#numbers.formatDecimal(sc.price, 0, 'POINT', 0, 'POINT')} + ' đ'"></h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4 th:text="${sc.name}">Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                            <button type="button" th:id="${sc.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch order" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
+                            <button type="button" th:id="${product.id}" onclick="getOrderCard(this.id)" class="btn btn-secondary font-weight-bold py-1 px-2 mt-1 launch" data-toggle="modal" data-target="#staticBackdrop">Order Now</button>
                             </button>
                         </div>
                     </div>
@@ -123,129 +60,132 @@
 
             </div>
         </div>
+
+
     </div>
-    <!-- Menu End -->
+</div>
+<!-- Menu End -->
 
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body ">
-                    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body ">
+                <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
 
-                    <div class="px-4 py-5">
-                        <form th:action="@{/addShoppingCard}" method="POST" id="order_form">
-                            <div class="image-slider">
-                                <img src="" id="order_image" style="width: 250px">
-                            </div>
-                            <div class="product_detail">
-                                <h5 id="product_name"></h5>
-                                <span id="product_price" style="text-decoration-line: line-through" ></span>
-                                <span id="product_new_price"></span>
-                            </div>
-                            <h5 class="product-sub-heading">Evaluated</h5>
-                            <h5 class="product-sub-heading" >Select size</h5>
-                            <div th:each="size:${sizes}">
-                                <input name="size" type="radio" th:value="*{size.name}" th:text="*{size.name}"><br>
-                            </div>
-                            <h5 class="product-sub-heading">Select sugar</h5>
-                            <div th:each="sugar:${sugars}">
-                                <p><input name="sugar" type="radio"  th:value="*{sugar.percent}" th:text="*{sugar.percent}"></p>
-                            </div>
-                            <h5 class="product-sub-heading">Select ice</h5>
-                            <div th:each="ice:${ices}">
-                                <p><input name="ice" type="radio" th:value="*{ice.percent}" th:text="*{ice.percent}"></p>
-                            </div>
-                            <h5 class="product-sub-heading">Topping</h5>
-                            <div th:each="topping:${toppings}">
-                                <p><input name="topping" type="radio" th:value="*{topping.topping}" th:text="*{topping.topping}"></p>
-                            </div>
-                            <input type="hidden" name="userId" th:value="${currentUserId}"  id="userId">
-                            <input type="hidden" name="productName" id="productName">
-                            <input type="hidden" name="productPrice" id="productPrice">
-                            <button class="btn btn-default btn-success" onclick="form_submit()" type="submit" name="submit" value="Submit">Order Now</button>
-                        </form>
-
-                    </div>
-
+                <div class="px-4 py-5">
+                    <form th:action="@{/addShoppingCard}" method="POST" id="order_form">
+                        <div class="image-slider">
+                            <img src="" id="order_image" style="width: 250px">
+                        </div>
+                        <div class="product_detail">
+                            <h5 id="product_name"></h5>
+                            <span id="product_price" style="text-decoration-line: line-through" ></span>
+                            <span id="product_new_price"></span>
+                        </div>
+                        <h5 class="product-sub-heading">Evaluated</h5>
+                        <h5 class="product-sub-heading" >Select size</h5>
+                        <div th:each="size:${sizes}">
+                            <input name="size" type="radio" th:value="*{size.name}" th:text="*{size.name}"><br>
+                        </div>
+                        <h5 class="product-sub-heading">Select sugar</h5>
+                        <div th:each="sugar:${sugars}">
+                            <p><input name="sugar" type="radio"  th:value="*{sugar.percent}" th:text="*{sugar.percent}"></p>
+                        </div>
+                        <h5 class="product-sub-heading">Select ice</h5>
+                        <div th:each="ice:${ices}">
+                            <p><input name="ice" type="radio" th:value="*{ice.percent}" th:text="*{ice.percent}"></p>
+                        </div>
+                        <h5 class="product-sub-heading">Topping</h5>
+                        <div th:each="topping:${toppings}">
+                            <p><input name="topping" type="radio" th:value="*{topping.topping}" th:text="*{topping.topping}"></p>
+                        </div>
+                        <input type="hidden" name="userId" th:value="${currentUserId}"  id="userId">
+                        <input type="hidden" name="productName" id="productName">
+                        <input type="hidden" name="productPrice" id="productPrice">
+                        <button class="btn btn-default btn-success" onclick="form_submit()" type="submit" name="submit" value="Submit">Order Now</button>
+                    </form>
 
                 </div>
+
+
             </div>
         </div>
     </div>
-    <!-- Footer Start -->
-    <div th:replace="fragments :: html_footer"></div>
+</div>
+<!-- Footer Start -->
+<div th:replace="fragments :: html_footer"></div>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-web btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-
-    <div th:replace="fragments :: html_cript"></div>
-
-    <script type="text/javascript">
-        var orderImage = document.getElementById('order_image')
-        var productName = document.getElementById('product_name')
-        var productNewPrice = document.getElementById('product_new_price')
-        var productPrice = document.getElementById('product_price')
-        var pName = document.getElementById('productName')
-        var currentUserId = document.getElementById('userId').value
-        var pPrice = document.getElementById('productPrice')
-        const navLink = document.querySelectorAll.bind(document)('.nav-link')
-        navLink.forEach(nav=>{
-            nav.classList.remove('active')
-        })
-        const contact = document.querySelector.bind(document)('.menu')
-        contact.classList.add('active')
-
-        function getOrderCard(id){
-            var api = "/api/products/"+id;
-            fetch(api)
-                .then((response) => response.json())
-                .then((data) => console.log(data),
-                    $.ajax({
-                        method: "GET",
-                        url: "/api/products/"+id,
-                        type:"json",
-                        success: function (reponse){
-                            orderImage.src ='/images/getimage/'+ reponse.image;
-                            productName.textContent = reponse.name
-                            pName.value = reponse.name
-                            productPrice.textContent = reponse.price
-                            pPrice.value = reponse.price
-                            switch (reponse.sale.percent){
-                                case "Sale 25%":
-                                    productNewPrice.textContent = reponse.price - reponse.price*25/100
-                                    break
-                                case "Sale 50%":
-                                    productNewPrice.textContent = reponse.price - reponse.price*50/100
-                                    break
-                                case "Sale 75%":
-                                    productNewPrice.textContent = reponse.price - reponse.price*75/100
-                                    break
-                                case "Không sale":
-                                    productNewPrice.textContent = reponse.price
-                                    break
-                            }
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-web btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-                        },error: function (err){
-                            alert("false")
+<!-- JavaScript Libraries -->
+
+<div th:replace="fragments :: html_cript"></div>
+
+<script type="text/javascript">
+    var orderImage = document.getElementById('order_image')
+    var productName = document.getElementById('product_name')
+    var productNewPrice = document.getElementById('product_new_price')
+    var productPrice = document.getElementById('product_price')
+    var pName = document.getElementById('productName')
+    var currentUserId = document.getElementById('userId').value
+    var pPrice = document.getElementById('productPrice')
+    const navLink = document.querySelectorAll.bind(document)('.nav-link')
+    navLink.forEach(nav=>{
+        nav.classList.remove('active')
+    })
+    const contact = document.querySelector.bind(document)('.menu')
+    contact.classList.add('active')
+
+    function getOrderCard(id){
+        var api = "/api/products/"+id;
+        fetch(api)
+            .then((response) => response.json())
+            .then((data) => console.log(data),
+                $.ajax({
+                    method: "GET",
+                    url: "/api/products/"+id,
+                    type:"json",
+                    success: function (reponse){
+                        orderImage.src ='/images/getimage/'+ reponse.image;
+                        productName.textContent = reponse.name
+                        pName.value = reponse.name
+                        productPrice.textContent = reponse.price
+                        pPrice.value = reponse.price
+                        switch (reponse.sale.percent){
+                            case "Sale 25%":
+                                productNewPrice.textContent = reponse.price - reponse.price*25/100
+                                break
+                            case "Sale 50%":
+                                productNewPrice.textContent = reponse.price - reponse.price*50/100
+                                break
+                            case "Sale 75%":
+                                productNewPrice.textContent = reponse.price - reponse.price*75/100
+                                break
+                            case "Không sale":
+                                productNewPrice.textContent = reponse.price
+                                break
                         }
-                    })
-                )
 
+
+                    },error: function (err){
+                        alert("false")
+                    }
+                })
+            )
+
+    }
+    function form_submit() {
+        if(currentUserId == null){
+            alert("Ban phai dang nhap ")
+        }else{
+            document.getElementById("order_form").submit();
         }
-        function form_submit() {
-            if(currentUserId == null){
-                alert("Ban phai dang nhap ")
-            }else{
-                document.getElementById("order_form").submit();
-            }
 
-        }
+    }
 
-    </script>
+</script>
 </body>
 
 </html>

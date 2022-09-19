@@ -1,0 +1,7 @@
+link github: https://github.com/buck1105/final_project_sem2/tree/main/project-sem2
+Admin account :
+{
+	email : linh@gmail.com,
+	password: 123456
+}
+
